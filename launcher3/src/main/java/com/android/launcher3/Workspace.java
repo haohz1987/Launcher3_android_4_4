@@ -1315,6 +1315,7 @@ public class Workspace extends PagedView
         return mCustomContentCallbacks;
     }
 
+    @SuppressLint("StaticFieldLeak")
     protected void setWallpaperDimension() {
         new AsyncTask<Void, Void, Void>() {
             public Void doInBackground(Void ... args) {
@@ -4286,7 +4287,7 @@ public class Workspace extends PagedView
 
     interface ItemOperator {
         /**
-         * Process the next itemInfo, possibly with side-effect on {@link ItemOperator#value}.
+         * Process the next itemInfo, possibly with side-effect on {link ItemOperator#value}.
          *
          * @param info info for the shortcut
          * @param view view for the shortcut

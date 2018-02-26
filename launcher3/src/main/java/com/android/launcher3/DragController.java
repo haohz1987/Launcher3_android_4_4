@@ -41,6 +41,7 @@ import java.util.HashSet;
 
 /**
  * Class for initiating a drag within a view or across multiple views.
+ * 页面间移动
  */
 public class DragController {
     private static final String TAG = "Launcher.DragController";
@@ -146,7 +147,7 @@ public class DragController {
     /**
      * Used to create a new DragLayer from XML.
      *
-     * @param context The application's context.
+     * param context The application's context.
      */
     public DragController(Launcher launcher) {
         Resources r = launcher.getResources();
@@ -175,7 +176,7 @@ public class DragController {
      * @param dragAction The drag action: either {@link #DRAG_ACTION_MOVE} or
      *        {@link #DRAG_ACTION_COPY}
      * @param viewImageBounds the position of the image inside the view
-     * @param dragRegion Coordinates within the bitmap b for the position of item being dragged.
+     * param dragRegion Coordinates within the bitmap b for the position of item being dragged.
      *          Makes dragging feel more precise, e.g. you can clip out a transparent border
      */
     public void startDrag(View v, Bitmap bmp, DragSource source, Object dragInfo,

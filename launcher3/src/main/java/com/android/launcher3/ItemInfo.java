@@ -28,6 +28,7 @@ import java.util.Arrays;
 
 /**
  * Represents an item in the launcher.
+ * 在桌面绘制一个图标块
  */
 public class ItemInfo {
 

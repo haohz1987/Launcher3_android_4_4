@@ -1009,10 +1009,8 @@ public class Launcher extends Activity
             showWidgetsView(false, false);
         }
         mOnResumeState = State.NONE;
-
-        // Background was set to gradient in onPause(), restore to transparent if in all apps.
-        setWorkspaceBackground(mState == State.WORKSPACE ? WORKSPACE_BACKGROUND_GRADIENT
-                : WORKSPACE_BACKGROUND_TRANSPARENT);
+        /* 墙纸修改为始终为灰黑色 */
+        getWindow().setBackgroundDrawable(new ColorDrawable(Color.DKGRAY));
 
         mPaused = false;
         if (mRestoring || mOnResumeNeedsLoad) {
@@ -1401,31 +1399,31 @@ public class Launcher extends Activity
         });
         mWidgetsButton.setOnTouchListener(getHapticFeedbackTouchListener());
 
-        View wallpaperButton = findViewById(R.id.wallpaper_button);
-        wallpaperButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                if (!mWorkspace.isSwitchingState()) {
-                    onClickWallpaperPicker(arg0);
-                }
-            }
-        });
-        wallpaperButton.setOnTouchListener(getHapticFeedbackTouchListener());
+//        View wallpaperButton = findViewById(R.id.wallpaper_button);
+//        wallpaperButton.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View arg0) {
+//                if (!mWorkspace.isSwitchingState()) {
+//                    onClickWallpaperPicker(arg0);
+//                }
+//            }
+//        });
+//        wallpaperButton.setOnTouchListener(getHapticFeedbackTouchListener());
 
-        View settingsButton = findViewById(R.id.settings_button);
-        if (hasSettings()) {
-            settingsButton.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View arg0) {
-                    if (!mWorkspace.isSwitchingState()) {
-                        onClickSettingsButton(arg0);
-                    }
-                }
-            });
-            settingsButton.setOnTouchListener(getHapticFeedbackTouchListener());
-        } else {
-            settingsButton.setVisibility(View.GONE);
-        }
+//        View settingsButton = findViewById(R.id.settings_button);
+//        if (hasSettings()) {
+//            settingsButton.setOnClickListener(new OnClickListener() {
+//                @Override
+//                public void onClick(View arg0) {
+//                    if (!mWorkspace.isSwitchingState()) {
+//                        onClickSettingsButton(arg0);
+//                    }
+//                }
+//            });
+//            settingsButton.setOnTouchListener(getHapticFeedbackTouchListener());
+//        } else {
+//            settingsButton.setVisibility(View.GONE);
+//        }
 
         mOverviewPanel.setAlpha(0f);
 
@@ -1956,7 +1954,7 @@ public class Launcher extends Activity
             Log.d(TAG, "Time spent in onNewIntent: " + (System.currentTimeMillis() - startTime));
         }
     }
-
+    //如果桌面被回收，保存当前的页数及cellLayout信息
     @Override
     public void onRestoreInstanceState(Bundle state) {
         super.onRestoreInstanceState(state);
@@ -1967,15 +1965,17 @@ public class Launcher extends Activity
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+        //如果当前屏幕数大于1（标签大于0），保存当前屏幕指示器的位置
         if (mWorkspace.getChildCount() > 0) {
             outState.putInt(RUNTIME_STATE_CURRENT_SCREEN,
                     mWorkspace.getCurrentPageOffsetFromCustomContent());
         }
         super.onSaveInstanceState(outState);
-
+        //图标位置
         outState.putInt(RUNTIME_STATE, mState.ordinal());
         // We close any open folder since it will not be re-opened, and we need to make sure
         // this state is reflected.
+        //如果有文件夹正在打开，关闭文件夹
         closeFolder();
 
         if (mPendingAddInfo.container != ItemInfo.NO_ID && mPendingAddInfo.screenId > -1 &&
@@ -3257,28 +3257,29 @@ public class Launcher extends Activity
         return (mState == State.WIDGETS) || (mOnResumeState == State.WIDGETS);
     }
 
-    private void setWorkspaceBackground(int background) {
-        switch (background) {
-            case WORKSPACE_BACKGROUND_TRANSPARENT:
-                getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                break;
-            case WORKSPACE_BACKGROUND_BLACK:
-                getWindow().setBackgroundDrawable(null);
-                break;
-            default:
-                getWindow().setBackgroundDrawable(mWorkspaceBackgroundDrawable);
-        }
-    }
+//    private void setWorkspaceBackground(int background) {
+//        switch (background) {
+//            case WORKSPACE_BACKGROUND_TRANSPARENT:
+//                getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//                break;
+//            case WORKSPACE_BACKGROUND_BLACK:
+//                getWindow().setBackgroundDrawable(null);
+//                break;
+//            default:
+//                getWindow().setBackgroundDrawable(mWorkspaceBackgroundDrawable);
+//        }
+//    }
 
-    protected void changeWallpaperVisiblity(boolean visible) {
-        int wpflags = visible ? WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER : 0;
-        int curflags = getWindow().getAttributes().flags
-                & WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER;
-        if (wpflags != curflags) {
-            getWindow().setFlags(wpflags, WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER);
-        }
-        setWorkspaceBackground(visible ? WORKSPACE_BACKGROUND_GRADIENT : WORKSPACE_BACKGROUND_BLACK);
-    }
+//    protected void changeWallpaperVisiblity(boolean visible) {
+//        int wpflags = visible ? WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER : 0;
+//        int curflags = getWindow().getAttributes().flags
+//                & WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER;
+//        if (wpflags != curflags) {
+//            getWindow().setFlags(wpflags, WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER);
+//        }
+//         /* 墙纸修改为始终为灰黑色 */
+//        getWindow().setBackgroundDrawable(new ColorDrawable(Color.DKGRAY));
+//    }
 
     @Override
     public void onTrimMemory(int level) {
@@ -4033,7 +4034,7 @@ public class Launcher extends Activity
         mWorkspace.reinflateWidgetsIfNecessary();
         LauncherModel.updateItemInDatabase(this, info);
     }
-
+    //当页面移动到边缘处添加新页面
     public void onPageBoundSynchronously(int page) {
         mSynchronouslyBoundPages.add(page);
     }
@@ -4062,7 +4063,8 @@ public class Launcher extends Activity
         mWorkspace.restoreInstanceStateForRemainingPages();
 
         setWorkspaceLoading(false);
-        sendLoadingCompleteBroadcastIfNecessary();
+
+        sendLoadingCompleteBroadcastIfNecessary();//第一次Item初始化完成广播
 
         // If we received the result of any pending adds while the loader was running (e.g. the
         // widget configuration forced an orientation change), process them now.
@@ -4491,7 +4493,9 @@ public class Launcher extends Activity
 
     protected void showIntroScreen() {
         View introScreen = getIntroScreen();
-        changeWallpaperVisiblity(false);
+        /* 墙纸修改为始终为灰黑色 */
+        getWindow().setBackgroundDrawable(new ColorDrawable(Color.DKGRAY));
+
         if (introScreen != null) {
             mDragLayer.showOverlayView(introScreen);
         }
@@ -4522,7 +4526,8 @@ public class Launcher extends Activity
             }
             showFirstRunClings();
         }
-        changeWallpaperVisiblity(true);
+       /* 墙纸修改为始终为灰黑色 */
+        getWindow().setBackgroundDrawable(new ColorDrawable(Color.DKGRAY));
     }
 
     private void markIntroScreenDismissed() {
