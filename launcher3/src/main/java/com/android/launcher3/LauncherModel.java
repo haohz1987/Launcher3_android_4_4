@@ -82,6 +82,8 @@ import java.util.Set;
  * Maintains in-memory state of the Launcher. It is expected that there should be only one
  * LauncherModel object held in a static. Also provide APIs for updating the database state
  * for the Launcher.
+ *
+ * 数据处理类，保存桌面状态，提供读写数据库的API，内部类LoaderTask用来初始化桌面。
  */
 public class LauncherModel extends BroadcastReceiver
         implements LauncherAppsCompat.OnAppsChangedCallbackCompat {
@@ -1080,7 +1082,7 @@ public class LauncherModel extends BroadcastReceiver
     /**
      * Removes the specified items from the database
      * @param context
-     * @param item
+     * param item
      */
     static void deleteItemsFromDatabase(Context context, final ArrayList<? extends ItemInfo> items) {
         final ContentResolver cr = context.getContentResolver();
@@ -1345,11 +1347,11 @@ public class LauncherModel extends BroadcastReceiver
     public void startLoader(int synchronousBindPage, int loadFlags) {
         // Enable queue before starting loader. It will get disabled in Launcher#finishBindingItems
         InstallShortcutReceiver.enableInstallQueue();
-        synchronized (mLock) {
+        synchronized (mLock) {// 将该代码块锁住，同时只能有一个线程执行它
             // Clear any deferred bind-runnables from the synchronized load process
             // We must do this before any loading/binding is scheduled below.
             synchronized (mDeferredBindRunnables) {
-                mDeferredBindRunnables.clear();
+                mDeferredBindRunnables.clear();// 清除延迟执行的绑定app的线程
             }
 
             // Don't bother to start the thread if we know it's not going to do anything
@@ -1357,6 +1359,7 @@ public class LauncherModel extends BroadcastReceiver
                 // If there is already one running, tell it to stop.
                 stopLoaderLocked();
                 mLoaderTask = new LoaderTask(mApp.getContext(), loadFlags);
+                // launcher不在前台运行 && 所有app已经加载 && workspace已经加载
                 if (synchronousBindPage != PagedView.INVALID_RESTORE_PAGE
                         && mAllAppsLoaded && mWorkspaceLoaded && !mIsLoaderTaskRunning) {
                     mLoaderTask.runBindSynchronousPage(synchronousBindPage);
@@ -1546,6 +1549,7 @@ public class LauncherModel extends BroadcastReceiver
             // workspace first (default).
             keep_running: {
                 if (DEBUG_LOADERS) Log.d(TAG, "step 1: loading workspace");
+                // 加载和绑定workspace
                 loadAndBindWorkspace();
 
                 if (mStopped) {
@@ -1717,21 +1721,24 @@ public class LauncherModel extends BroadcastReceiver
             }
         }
 
+        /* 加载Workspace上要显示的数据 */
         private void loadWorkspace() {
             final long t = DEBUG_LOADERS ? SystemClock.uptimeMillis() : 0;
 
             final Context context = mContext;
+            // 用来保存加载数据后的一些信息
             final ContentResolver contentResolver = context.getContentResolver();
             final PackageManager manager = context.getPackageManager();
-            final boolean isSafeMode = manager.isSafeMode();
+            final boolean isSafeMode = manager.isSafeMode();// 是否安全模式启动
             final LauncherAppsCompat launcherApps = LauncherAppsCompat.getInstance(context);
+            // SdCard是否就绪
             final boolean isSdCardReady = context.registerReceiver(null,
                     new IntentFilter(StartupReceiver.SYSTEM_READY)) != null;
 
             LauncherAppState app = LauncherAppState.getInstance();
             InvariantDeviceProfile profile = app.getInvariantDeviceProfile();
-            int countX = profile.numColumns;
-            int countY = profile.numRows;
+            int countX = profile.numColumns;// workspace列数
+            int countY = profile.numRows;// workspace行数
 
             if (MigrateFromRestoreTask.ENABLED && MigrateFromRestoreTask.shouldRunTask(mContext)) {
                 long migrationStartTime = System.currentTimeMillis();
@@ -1744,7 +1751,6 @@ public class LauncherModel extends BroadcastReceiver
                     task.execute();
                 } catch (Exception e) {
                     Log.e(TAG, "Error during grid migration", e);
-
                     // Clear workspace.
                     mFlags = mFlags | LOADER_FLAG_CLEAR_WORKSPACE;
                 }
@@ -2565,7 +2571,6 @@ public class LauncherModel extends BroadcastReceiver
         private void bindWorkspace(int synchronizeBindPage) {
             final long t = SystemClock.uptimeMillis();
             Runnable r;
-
             // Don't use these two variables in any of the callback runnables.
             // Otherwise we hold a reference to them.
             final Callbacks oldCallbacks = mCallbacks.get();

@@ -48,7 +48,10 @@ import com.android.launcher3.util.Thunk;
 import java.util.ArrayList;
 
 /**
- * An icon that can appear on in the workspace representing an {@link UserFolder}.
+ * An icon that can appear on in the workspace representing an {link UserFolder}.
+ *
+ *  文件夹图标
+ *
  */
 public class FolderIcon extends FrameLayout implements FolderListener {
     @Thunk Launcher mLauncher;

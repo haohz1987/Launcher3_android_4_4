@@ -106,6 +106,7 @@ import com.android.launcher3.compat.UserHandleCompat;
 import com.android.launcher3.compat.UserManagerCompat;
 import com.android.launcher3.model.WidgetsModel;
 import com.android.launcher3.util.ComponentKey;
+import com.android.launcher3.util.LogT;
 import com.android.launcher3.util.LongArrayMap;
 import com.android.launcher3.util.Thunk;
 import com.android.launcher3.widget.PendingAddWidgetInfo;
@@ -128,6 +129,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Default launcher application.
+ * 主界面Activity，最核心且唯一的Activity
  */
 public class Launcher extends Activity
         implements View.OnClickListener, OnLongClickListener, LauncherModel.Callbacks,
@@ -433,22 +435,29 @@ public class Launcher extends Activity
                 == Configuration.ORIENTATION_LANDSCAPE ?
                         app.getInvariantDeviceProfile().landscapeProfile
                             : app.getInvariantDeviceProfile().portraitProfile;
-
+        // 初始化SharedPreference
         mSharedPrefs = getSharedPreferences(LauncherAppState.getSharedPreferencesKey(),
                 Context.MODE_PRIVATE);
+        // 是否是安全模式，关机启动Recovery Mode可以选择打开安全模式
         mIsSafeModeEnabled = getPackageManager().isSafeMode();
+        // 获取LauncherModel对象，在LauncherAppState已经初始化
         mModel = app.setLauncher(this);
+        // 获取IconCache对象，在LauncherAppState已经初始化
         mIconCache = app.getIconCache();
 
+//        mIconCache.flushInvalidIcons(grid);// 清除尺寸不符的icon缓存对象,未找到此方法
+
+        // 初始化DragController对象，DragController用来处理拖拽操作
         mDragController = new DragController(this);
         mInflater = getLayoutInflater();
         mStateTransitionAnimation = new LauncherStateTransitionAnimation(this);
 
         mStats = new Stats(this);
-
+        // 获取AppWidgetManager实例
         mAppWidgetManager = AppWidgetManagerCompat.getInstance(this);
-
+        // LauncherAppWidgetHost，桌面插件宿主
         mAppWidgetHost = new LauncherAppWidgetHost(this, APPWIDGET_HOST_ID);
+        // 开启LauncherAppWidgetHost的监听，以便发生变化时做出响应
         mAppWidgetHost.startListening();
 
         // If we are getting an onCreate, we can actually preempt onResume and unset mPaused here,
@@ -463,19 +472,20 @@ public class Launcher extends Activity
 
         setContentView(R.layout.launcher);
 
-        setupViews();
-        mDeviceProfile.layout(this);
+        setupViews();// 获取控件并初始化
+        mDeviceProfile.layout(this);// 放置布局中的各个控件
 
-        lockAllApps();
+        lockAllApps();// 空方法
 
         mSavedState = savedInstanceState;
-        restoreState(mSavedState);
+        restoreState(mSavedState);// 从保存的状态恢复
 
         if (PROFILE_STARTUP) {
             android.os.Debug.stopMethodTracing();
         }
-
+        // 调用startLoader方法加载app,用来异步加载桌面的应用快捷图标、小部件和所有应用图标
         if (!mRestoring) {
+            // 不能同步绑定当前页面，初始为false
             if (DISABLE_SYNCHRONOUS_BINDING_CURRENT_PAGE) {
                 // If the user leaves launcher, then we should just load items asynchronously when
                 // they return.
@@ -493,6 +503,9 @@ public class Launcher extends Activity
 
         IntentFilter filter = new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
         registerReceiver(mCloseSystemDialogsReceiver, filter);
+
+        // 对大屏幕，希望Launcher可以横竖屏切换,作者已删除
+//        unlockScreenOrientation(true);
 
         mRotationEnabled = Utilities.isRotationAllowedForDevice(getApplicationContext());
         // In case we are on a device with locked rotation, we should look at preferences to check
@@ -515,7 +528,7 @@ public class Launcher extends Activity
                 mWorkspace.setLauncherOverlay(mLauncherOverlay);
             }
         }
-
+        // 第一次启动时加载用户提示界面
         if (shouldShowIntroScreen()) {
             showIntroScreen();
         } else {
@@ -568,8 +581,7 @@ public class Launcher extends Activity
                 }
                 if (mHotseat != null) {
                     mHotseatImportanceForAccessibility = mHotseat.getImportantForAccessibility();
-                    mHotseat.setImportantForAccessibility(
-                            View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);
+                    mHotseat.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);
                     mHotseatImportanceStored = true;
                 }
             }
@@ -1977,14 +1989,14 @@ public class Launcher extends Activity
         // this state is reflected.
         //如果有文件夹正在打开，关闭文件夹
         closeFolder();
-
+        //保存当前Item的位置信息，屏幕信息
         if (mPendingAddInfo.container != ItemInfo.NO_ID && mPendingAddInfo.screenId > -1 &&
                 mWaitingForResult) {
-            outState.putLong(RUNTIME_STATE_PENDING_ADD_CONTAINER, mPendingAddInfo.container);
-            outState.putLong(RUNTIME_STATE_PENDING_ADD_SCREEN, mPendingAddInfo.screenId);
-            outState.putInt(RUNTIME_STATE_PENDING_ADD_CELL_X, mPendingAddInfo.cellX);
+            outState.putLong(RUNTIME_STATE_PENDING_ADD_CONTAINER, mPendingAddInfo.container);//文件夹d
+            outState.putLong(RUNTIME_STATE_PENDING_ADD_SCREEN, mPendingAddInfo.screenId);//指示器id
+            outState.putInt(RUNTIME_STATE_PENDING_ADD_CELL_X, mPendingAddInfo.cellX);//item的X坐标
             outState.putInt(RUNTIME_STATE_PENDING_ADD_CELL_Y, mPendingAddInfo.cellY);
-            outState.putInt(RUNTIME_STATE_PENDING_ADD_SPAN_X, mPendingAddInfo.spanX);
+            outState.putInt(RUNTIME_STATE_PENDING_ADD_SPAN_X, mPendingAddInfo.spanX);//item的X坐标跨距
             outState.putInt(RUNTIME_STATE_PENDING_ADD_SPAN_Y, mPendingAddInfo.spanY);
             outState.putParcelable(RUNTIME_STATE_PENDING_ADD_WIDGET_INFO, mPendingAddWidgetInfo);
             outState.putInt(RUNTIME_STATE_PENDING_ADD_WIDGET_ID, mPendingAddWidgetId);
@@ -2466,6 +2478,7 @@ public class Launcher extends Activity
      */
     @Override
     public void onAppWidgetHostReset() {
+        // 开启LauncherAppWidgetHost的监听，以便发生变化时做出响应
         if (mAppWidgetHost != null) {
             mAppWidgetHost.startListening();
         }
@@ -3476,11 +3489,14 @@ public class Launcher extends Activity
     /**
      * Updates the set of predicted apps if it hasn't been updated since the last time Launcher was
      * resumed.
+     * 尝试更新预装的app
      */
     private void tryAndUpdatePredictedApps() {
         if (mLauncherCallbacks != null) {
             List<ComponentKey> apps = mLauncherCallbacks.getPredictedApps();
             if (apps != null) {
+                LogT.w("尝试更新预装的app="+apps.toString());
+
                 mAppsView.setPredictedApps(apps);
             }
         }
@@ -3488,6 +3504,7 @@ public class Launcher extends Activity
 
     void lockAllApps() {
         // TODO
+
     }
 
     void unlockAllApps() {

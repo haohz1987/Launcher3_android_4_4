@@ -17,6 +17,7 @@
 package com.android.launcher3;
 
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -48,7 +49,11 @@ import com.android.launcher3.model.PackageItemInfo;
  * TextView that draws a bubble behind the text. We cannot use a LineBackgroundSpan
  * because we want to make the bubble taller than the text and TextView's clip is
  * too aggressive.
+ *
+ *  图标都基于他，继承自TextView
+ *
  */
+@SuppressLint("AppCompatCustomView")
 public class BubbleTextView extends TextView
         implements BaseRecyclerViewFastScrollBar.FastScrollFocusableView {
 
@@ -359,6 +364,7 @@ public class BubbleTextView extends TextView
         return result;
     }
 
+    @SuppressLint("WrongConstant")
     @Override
     public void draw(Canvas canvas) {
         if (!mCustomShadowsEnabled) {

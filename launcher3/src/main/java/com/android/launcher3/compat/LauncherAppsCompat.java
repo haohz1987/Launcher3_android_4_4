@@ -29,6 +29,10 @@ import com.android.launcher3.Utilities;
 
 import java.util.List;
 
+/**
+ *  获取已安装App列表信息的兼容抽象基类，子类依据不同版本API进行兼容性处理
+ *
+ */
 public abstract class LauncherAppsCompat {
 
     public static final String ACTION_MANAGED_PROFILE_ADDED =

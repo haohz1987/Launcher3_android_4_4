@@ -44,6 +44,11 @@ import java.util.WeakHashMap;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 
+/**
+ *
+ *  存储Widget信息的数据库，内部创建了数据库widgetpreviews.db
+ *
+ */
 public class WidgetPreviewLoader {
 
     private static final String TAG = "WidgetPreviewLoader";

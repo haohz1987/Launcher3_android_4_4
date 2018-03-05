@@ -59,6 +59,7 @@ import java.util.Stack;
 
 /**
  * Cache of application icons.  Icons can be made from any thread.
+ * 保存应用图标、title、应用的描述，内部创建了数据库app_icons.db
  */
 public class IconCache {
 
@@ -74,7 +75,7 @@ public class IconCache {
     private static final int LOW_RES_SCALE_FACTOR = 5;
 
     @Thunk static final Object ICON_UPDATE_TOKEN = new Object();
-
+    /* 应用图标、title、应用的描述 */
     @Thunk static class CacheEntry {
         public Bitmap icon;
         public CharSequence title = "";
@@ -128,7 +129,7 @@ public class IconCache {
         mLowResOptions.inPreferredConfig = Bitmap.Config.RGB_565;
         updateSystemStateString();
     }
-
+    /* 如果没有找到activity对应的图标，返回由系统获取的默认图标 */
     private Drawable getFullResDefaultActivityIcon() {
         return getFullResIcon(Resources.getSystem(), android.R.mipmap.sym_def_app_icon);
     }
@@ -530,6 +531,11 @@ public class IconCache {
     /**
      * Retrieves the entry from the cache. If the entry is not present, it creates a new entry.
      * This method is not thread safe, it must be called from a synchronized method.
+     *
+     * 添加图标最关键的方法是IconCache.cacheLocked()， 这个方法会获取某个Component[Activity]的图标
+     * 和标题，并存入mCache中， 我们看到这个方法名最后是“Locked”表明，说明该方法调用的时候已经
+     * 保证是线程安全的，可以看到IconCache.cacheLocked()每个调用的方法都有关键字synchronized。
+     *
      */
     private CacheEntry cacheLocked(ComponentName componentName, LauncherActivityInfoCompat info,
             UserHandleCompat user, boolean usePackageIcon, boolean useLowResIcon) {

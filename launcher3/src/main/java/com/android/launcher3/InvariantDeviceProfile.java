@@ -29,7 +29,10 @@ import com.android.launcher3.util.Thunk;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-
+/**
+ *  一些不变的设备相关参数管理类，其内部包涵了横竖屏模式的DeviceProfile。
+ *
+ * */
 public class InvariantDeviceProfile {
 
     // This is a static that we use for the default icon size on a 4/5-inch phone

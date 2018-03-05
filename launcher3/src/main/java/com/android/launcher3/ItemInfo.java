@@ -28,7 +28,11 @@ import java.util.Arrays;
 
 /**
  * Represents an item in the launcher.
- * 在桌面绘制一个图标块
+ *
+ *  在桌面绘制一个图标块,桌面上每个Item的信息数据结构，包括在第几屏、第几行、第几列、宽高等信息；
+ *  该对象与数据库中记录一一对应；该类有多个子类，
+ *  譬如FolderIcon的FolderInfo、BubbleTextView的ShortcutInfo等
+ *
  */
 public class ItemInfo {
 
@@ -193,9 +197,42 @@ public class ItemInfo {
 
     @Override
     public String toString() {
-        return "Item(id=" + this.id + " type=" + this.itemType + " container=" + this.container
-            + " screen=" + screenId + " cellX=" + cellX + " cellY=" + cellY + " spanX=" + spanX
-            + " spanY=" + spanY + " dropPos=" + Arrays.toString(dropPos)
-            + " user=" + user + ")";
+        final StringBuilder sb = new StringBuilder("{");
+        sb.append("\"user\":")
+                .append(user);
+        sb.append(",\"title\":")
+                .append(title);
+        sb.append(",\"spanY\":")
+                .append(spanY);
+        sb.append(",\"spanX\":")
+                .append(spanX);
+        sb.append(",\"screenId\":")
+                .append(screenId);
+        sb.append(",\"requiresDbUpdate\":")
+                .append(requiresDbUpdate);
+        sb.append(",\"rank\":")
+                .append(rank);
+        sb.append(",\"minSpanY\":")
+                .append(minSpanY);
+        sb.append(",\"minSpanX\":")
+                .append(minSpanX);
+        sb.append(",\"itemType\":")
+                .append(itemType);
+        sb.append(",\"intent\":")
+                .append(getIntent());
+        sb.append(",\"id\":")
+                .append(id);
+        sb.append(",\"dropPos\":")
+                .append(Arrays.toString(dropPos));
+        sb.append(",\"contentDescription\":")
+                .append(contentDescription);
+        sb.append(",\"container\":")
+                .append(container);
+        sb.append(",\"cellY\":")
+                .append(cellY);
+        sb.append(",\"cellX\":")
+                .append(cellX);
+        sb.append('}');
+        return sb.toString();
     }
 }

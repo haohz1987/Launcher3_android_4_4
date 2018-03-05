@@ -24,14 +24,14 @@ import android.animation.PropertyValuesHolder;
 import android.animation.TimeInterpolator;
 import android.annotation.SuppressLint;
 import android.content.res.Resources;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 
 import com.android.launcher3.allapps.AllAppsContainerView;
-import com.android.launcher3.util.UiThreadCircularReveal;
+import com.android.launcher3.util.LogT;
 import com.android.launcher3.util.Thunk;
+import com.android.launcher3.util.UiThreadCircularReveal;
 import com.android.launcher3.widget.WidgetsContainerView;
 
 import java.util.HashMap;
@@ -76,6 +76,9 @@ import java.util.HashMap;
  *          - From all apps
  *          - From the center workspace
  *          - From another workspace
+ *
+ *   各类动画总管处理执行类，负责各种情况下的各种动画效果处理。
+ *
  */
 public class LauncherStateTransitionAnimation {
 
@@ -183,7 +186,7 @@ public class LauncherStateTransitionAnimation {
         if (toWorkspaceState != Workspace.State.NORMAL &&
                 toWorkspaceState != Workspace.State.SPRING_LOADED &&
                 toWorkspaceState != Workspace.State.OVERVIEW) {
-            Log.e(TAG, "Unexpected call to startAnimationToWorkspace");
+            LogT.e("Unexpected call to startAnimationToWorkspace");
         }
 
         if (fromState == Launcher.State.APPS || fromState == Launcher.State.APPS_SPRING_LOADED) {

@@ -37,6 +37,11 @@ import com.android.launcher3.util.Thunk;
 
 import java.util.Arrays;
 
+/**
+ *
+ *  拖动图标时跟随手指移动的View
+ *
+ */
 public class DragView extends View {
     public static int COLOR_CHANGE_DURATION = 120;
 
@@ -304,7 +309,7 @@ public class DragView extends View {
     /**
      * Create a window containing this view and show it.
      *
-     * @param windowToken obtained from v.getWindowToken() from one of your views
+     * param windowToken obtained from v.getWindowToken() from one of your views
      * @param touchX the x coordinate the user touched in DragLayer coordinates
      * @param touchY the y coordinate the user touched in DragLayer coordinates
      */

@@ -29,7 +29,9 @@ import android.widget.RemoteViews;
 import com.android.launcher3.DragLayer.TouchCompleteListener;
 
 /**
- * {@inheritDoc}
+ *
+ *  AppWidgetHostView子类，配合LauncherAppWidgetHost得到HostView
+ *
  */
 public class LauncherAppWidgetHostView extends AppWidgetHostView implements TouchCompleteListener {
 

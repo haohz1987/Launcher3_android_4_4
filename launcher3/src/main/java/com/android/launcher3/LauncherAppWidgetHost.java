@@ -31,6 +31,9 @@ import java.util.ArrayList;
  * Specific {@link AppWidgetHost} that creates our {@link LauncherAppWidgetHostView}
  * which correctly captures all long-press events. This ensures that users can
  * always pick up and move widgets.
+ *
+ *  AppWidgetHost子类，是桌面插件宿主，为了方便托拽等才继承处理的
+ *
  */
 public class LauncherAppWidgetHost extends AppWidgetHost {
 
@@ -67,6 +70,7 @@ public class LauncherAppWidgetHost extends AppWidgetHost {
     @Override
     public void startListening() {
         try {
+            // Start receiving onAppWidgetChanged calls for your AppWidgets.
             super.startListening();
         } catch (Exception e) {
             if (e.getCause() instanceof TransactionTooLargeException) {

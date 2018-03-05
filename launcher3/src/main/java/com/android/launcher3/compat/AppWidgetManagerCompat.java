@@ -31,6 +31,11 @@ import com.android.launcher3.Utilities;
 
 import java.util.List;
 
+/**
+ *
+ *  获取AppWidget列表的兼容抽象基类，子类依据不同版本API进行兼容性处理
+ *
+ */
 public abstract class AppWidgetManagerCompat {
 
     private static final Object sInstanceLock = new Object();

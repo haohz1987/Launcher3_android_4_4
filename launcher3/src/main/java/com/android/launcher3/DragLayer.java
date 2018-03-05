@@ -46,6 +46,9 @@ import java.util.ArrayList;
 
 /**
  * A ViewGroup that coordinates dragging across its descendants
+ *
+ *  一个用来负责分发事件的ViewGroup
+ *
  */
 public class DragLayer extends InsettableFrameLayout {
 
@@ -674,12 +677,12 @@ public class DragLayer extends InsettableFrameLayout {
      *        location doesn't account for scaling, and so should be centered about the desired
      *        final location (including scaling).
      * @param finalAlpha The final alpha of the view, in case we want it to fade as it animates.
-     * @param finalScale The final scale of the view. The view is scaled about its center.
+     * param finalScale The final scale of the view. The view is scaled about its center.
      * @param duration The duration of the animation.
      * @param motionInterpolator The interpolator to use for the location of the view.
      * @param alphaInterpolator The interpolator to use for the alpha of the view.
      * @param onCompleteRunnable Optional runnable to run on animation completion.
-     * @param fadeOut Whether or not to fade out the view once the animation completes. If true,
+     * param fadeOut Whether or not to fade out the view once the animation completes. If true,
      *        the runnable will execute after the view is faded out.
      * @param anchorView If not null, this represents the view which the animated view stays
      *        anchored to in case scrolling is currently taking place. Note: currently this is

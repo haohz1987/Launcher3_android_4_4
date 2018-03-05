@@ -49,6 +49,7 @@ import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.animation.Interpolator;
 
 import com.android.launcher3.util.LauncherEdgeEffect;
+import com.android.launcher3.util.LogT;
 import com.android.launcher3.util.Thunk;
 
 import java.util.ArrayList;
@@ -234,6 +235,7 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
         setHapticFeedbackEnabled(false);
         mIsRtl = Utilities.isRtl(getResources());
         init();
+        LogT.w("mIsRtl="+mIsRtl);
     }
 
     /**

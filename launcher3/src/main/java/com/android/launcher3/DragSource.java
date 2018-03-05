@@ -22,6 +22,9 @@ import com.android.launcher3.DropTarget.DragObject;
 
 /**
  * Interface defining an object that can originate a drag.
+ *
+ * DragSource/DropTarget：拖拽接口，DragSource表示图标从哪开始拖，DropTarget表示图标被拖到哪去
+ *
  */
 public interface DragSource {
 

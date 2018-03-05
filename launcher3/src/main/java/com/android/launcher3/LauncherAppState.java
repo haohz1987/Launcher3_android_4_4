@@ -20,7 +20,6 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.UserManager;
 import android.util.Log;
 
 import com.android.launcher3.accessibility.LauncherAccessibilityDelegate;
@@ -30,7 +29,12 @@ import com.android.launcher3.compat.UserManagerCompat;
 import com.android.launcher3.util.Thunk;
 
 import java.lang.ref.WeakReference;
-
+/**
+ *
+ *  单例对象，构造方法中初始化对象、注册应用安装、卸载、更新，配置变化等广播。这些广播用来实时更新
+ *  桌面图标等，其receiver的实现在LauncherModel类中，LauncherModel也在这里初始化。
+ *
+ */
 public class LauncherAppState {
 
     private final AppFilter mAppFilter;
@@ -84,6 +88,7 @@ public class LauncherAppState {
         }
 
         mInvariantDeviceProfile = new InvariantDeviceProfile(sContext);
+        /* 应用图标缓存对象 */
         mIconCache = new IconCache(sContext, mInvariantDeviceProfile);
         mWidgetCache = new WidgetPreviewLoader(sContext, mIconCache);
 

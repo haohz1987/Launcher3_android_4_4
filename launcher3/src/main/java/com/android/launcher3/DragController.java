@@ -41,7 +41,9 @@ import java.util.HashSet;
 
 /**
  * Class for initiating a drag within a view or across multiple views.
- * 页面间移动
+ *
+ * 页面间移动,DragLayer只是一个ViewGroup，具体的拖拽的处理都放到了DragController中
+ *
  */
 public class DragController {
     private static final String TAG = "Launcher.DragController";

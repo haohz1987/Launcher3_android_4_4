@@ -64,6 +64,11 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
+/**
+ *
+ *  核心数据库类，负责launcher.db的创建与维护
+ *
+ */
 public class LauncherProvider extends ContentProvider {
     private static final String TAG = "LauncherProvider";
     private static final boolean LOGD = false;
@@ -359,11 +364,14 @@ public class LauncherProvider extends ContentProvider {
      *   2) From a package provided by play store
      *   3) From a partner configuration APK, already in the system image
      *   4) The default configuration for the particular device
+     *
+     *   加载默认的配置,保存到数据库中
+     *
      */
     synchronized public void loadDefaultFavoritesIfNecessary() {
         String spKey = LauncherAppState.getSharedPreferencesKey();
         SharedPreferences sp = getContext().getSharedPreferences(spKey, Context.MODE_PRIVATE);
-
+        // 判断数据库是否未创建
         if (sp.getBoolean(EMPTY_DATABASE_CREATED, false)) {
             Log.d(TAG, "loading default workspace");
 
