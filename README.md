@@ -1,6 +1,6 @@
 Launcher3
 =========
-
+[博客地址](http://blog.csdn.net/dingfengnupt88/article/details/51800057?locationNum=15)
 >类的定义
 
 Launcher：主界面Activity，最核心且唯一的Activity。
@@ -58,7 +58,8 @@ Launcher3的Activity加载其实和其他应用没啥区别的，也是一样的
 他们都是通过异步加载回调UI绑定数据的
 
 >读取数据库，获取需要加载的应用快捷方式和AppWidget
-     整个读取的过程是在一个同步代码块中，在此之前我们先看几个重要的全局变量，
+
+ 整个读取的过程是在一个同步代码块中，在此之前我们先看几个重要的全局变量，
            sBgWorkspaceItems--保存ItemInfo
            sBgAppWidgets--保存AppWidget
            sBgFolders--存放文件夹
