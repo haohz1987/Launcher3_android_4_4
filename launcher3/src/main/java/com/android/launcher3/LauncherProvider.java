@@ -16,6 +16,7 @@
 
 package com.android.launcher3;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.appwidget.AppWidgetHost;
 import android.appwidget.AppWidgetManager;
@@ -66,7 +67,13 @@ import java.util.List;
 
 /**
  *
- *  核心数据库类，负责launcher.db的创建与维护
+ *  核心数据库类，负责launcher.db的创建与维护，存放首页中的数据信息，实现其他应用对launcher中数据
+ *  的访问和操作。LauncherFiles.LAUNCHER_DB="launcher.db"，存储了桌面的item的信息。
+ *  launcher第一次运行完毕后，会在launcher.db中创建记录，里面有当前桌面图标。以后每次启动只会从这里
+ *  读取桌面图标。
+ *
+ *  Favorites.和launcherprovider定义了一个content provider,用来存储桌面上可以防止几个对象，
+ * 包括shortcut,search和clock等，
  *
  */
 public class LauncherProvider extends ContentProvider {
@@ -85,7 +92,7 @@ public class LauncherProvider extends ContentProvider {
 
     @Thunk LauncherProviderChangeListener mListener;
     @Thunk DatabaseHelper mOpenHelper;
-
+    /* 默认执行在主线程，不做耗时操作 */
     @Override
     public boolean onCreate() {
         final Context context = getContext();
@@ -104,7 +111,7 @@ public class LauncherProvider extends ContentProvider {
         mListener = listener;
         mOpenHelper.mListener = mListener;
     }
-
+    /* 返回 provider 中的数据的 MIME 类型 */
     @Override
     public String getType(Uri uri) {
         SqlArguments args = new SqlArguments(uri, null, null);
@@ -114,7 +121,7 @@ public class LauncherProvider extends ContentProvider {
             return "vnd.android.cursor.item/" + args.table;
         }
     }
-
+    /* 最好异步执行 */
     @Override
     public Cursor query(Uri uri, String[] projection, String selection,
             String[] selectionArgs, String sortOrder) {
@@ -350,6 +357,7 @@ public class LauncherProvider extends ContentProvider {
         mOpenHelper.createEmptyDB(mOpenHelper.getWritableDatabase());
     }
 
+    @SuppressLint("ApplySharedPref")
     public void clearFlagEmptyDbCreated() {
         String spKey = LauncherAppState.getSharedPreferencesKey();
         getContext().getSharedPreferences(spKey, Context.MODE_PRIVATE)
@@ -1053,7 +1061,8 @@ public class LauncherProvider extends ContentProvider {
 
             return rank;
         }
-
+        /* 创建数据库时调用，会解析xml目录下的default_workspace_.xml文件（在autoInstallsLayout中定义），
+         * 把其中的内容读出来写到数据库中，这样就做到了桌面的预制 */
         @Thunk int loadFavorites(SQLiteDatabase db, AutoInstallsLayout loader) {
             ArrayList<Long> screenIds = new ArrayList<Long>();
             // TODO: Use multiple loaders with fall-back and transaction.

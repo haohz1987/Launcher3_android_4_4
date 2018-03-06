@@ -124,7 +124,8 @@ public class LauncherSettings {
     }
 
     /**
-     * Favorites.
+     * Favorites.和launcherprovider定义了一个content provider,用来存储桌面上可以防止几个对象，
+     * 包括shortcut,search和clock等，
      */
     public static final class Favorites implements BaseLauncherColumns {
 

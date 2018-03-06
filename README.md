@@ -115,5 +115,8 @@ adb shell dumpsys meminfo com.meizu.flyme.launcher
 adb shell dumpsys meminfo com.android.systemui:recents
 
 分别查看system_server、launcher、systemui、recent的数据,4类加和即为总内存
+
 adb shell dumpsys meminfo实现原理
+
+![img](https://github.com/haohz1987/Launcher3_android_4_4/blob/modify/img/7adb%20shell%20dumpsys%20meminfo%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86.png)
 
