@@ -139,7 +139,8 @@ public class Launcher extends Activity
 
     static final boolean PROFILE_STARTUP = false;
     static final boolean DEBUG_WIDGETS = true;
-    static final boolean DEBUG_STRICT_MODE = false;
+    //  打开严苛模式，可选监视UI线程和虚拟机策略,默认false
+    static final boolean DEBUG_STRICT_MODE = true;
     static final boolean DEBUG_RESUME_TIME = false;
     static final boolean DEBUG_DUMP_LOG = false;
 
@@ -406,13 +407,28 @@ public class Launcher extends Activity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        /* 严苛模式，它将报告与线程及虚拟机相关的策略违例。一旦检测到策略违例（policy violation），
+        你将获得警告，其包含了一个栈trace显示你的应用在何处发生违例。你可以强制用警告代替崩溃（crash），
+        也可以仅将警告计入日志，让你的应用继续执行。 */
         if (DEBUG_STRICT_MODE) {
+            /* ThreadPolicy和线程相关，它主要针对主线程（或UI线程）。由于在主线程中读写磁盘和进行网络
+            访问都不是好的做法，Google已经在磁盘和网络代码中添加了严苛模式（StrictMode）钩子（hook）。
+            如果你对某个线程打开严苛模式（StrictMode），当那个线程进行磁盘和网络访问，你将获得警告。
+            你可以选择警告方式。一些违例包含用户慢速调用磁盘读写，网络访问。你能选择将警告写入LogCat，
+            显示一个对话框，闪下屏幕，写入DropBox日志文件，或让应用崩溃。通常是写入LogCat或让应用崩溃。
+            check "read/write disk", "access network" and "show call" in thread  */
+            // 监控在主线程（UI线程）中的操作
             StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
                     .detectDiskReads()
                     .detectDiskWrites()
                     .detectNetwork()   // or .detectAll() for all detectable problems
                     .penaltyLog()
                     .build());
+            /* 还有一种虚拟机策略（VmPolicy），能检查内存泄漏，譬如，当关闭一个SQLite对象前的完结操作，
+            或其他任何类似可关闭对象在关闭前的完结操作。虚拟机策略（VmPolicy）由一个类似的Builder类创建.
+            和线程策略（ThreadPolicy）不同的是，虚拟机策略（VmPolicy）不能通过一个对话框提供警告。
+            check leaks for "cursor", "close method", "activity instance", "object instance"
+            and "registration" in process */
             StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
                     .detectLeakedSqlLiteObjects()
                     .detectLeakedClosableObjects()
@@ -445,7 +461,7 @@ public class Launcher extends Activity
         // 获取IconCache对象，在LauncherAppState已经初始化
         mIconCache = app.getIconCache();
 
-//        mIconCache.flushInvalidIcons(grid);// 清除尺寸不符的icon缓存对象,未找到此方法
+//      mIconCache.flushInvalidIcons(grid);// 清除尺寸不符的icon缓存对象,未找到此方法
 
         // 初始化DragController对象，DragController用来处理拖拽操作
         mDragController = new DragController(this);
@@ -1882,7 +1898,10 @@ public class Launcher extends Activity
         // Whatever we were doing is hereby canceled.
         setWaitingForResult(false);
     }
-
+    /* 启动模式为singleTask，activity实例化时不会创建（不会调用on_Create），而会调用onNewIntent()
+    例如A-->B-->C-->A，使用时activity间跳转不要finish()
+    为防止意外，在on_Create()也要写操作，因为后台运行的Activity可能在内存过高时被系统杀掉，这时
+    就会走onCreat方法 */
     @Override
     protected void onNewIntent(Intent intent) {
         long startTime = 0;
@@ -1890,7 +1909,6 @@ public class Launcher extends Activity
             startTime = System.currentTimeMillis();
         }
         super.onNewIntent(intent);
-
         // Close the menu
         Folder openFolder = mWorkspace.getOpenFolder();
         boolean alreadyOnHome = mHasFocus && ((intent.getFlags() &
