@@ -54,7 +54,7 @@ import android.widget.TextView;
 import com.android.launcher3.CellLayout.CellInfo;
 import com.android.launcher3.DragController.DragListener;
 import com.android.launcher3.FolderInfo.FolderListener;
-import com.android.launcher3.UninstallDropTarget.UninstallSource;
+//import com.android.launcher3.UninstallDropTarget.UninstallSource;
 import com.android.launcher3.Workspace.ItemOperator;
 import com.android.launcher3.accessibility.LauncherAccessibilityDelegate.AccessibilityDragSource;
 import com.android.launcher3.util.Thunk;
@@ -72,7 +72,7 @@ import java.util.Comparator;
  */
 public class Folder extends LinearLayout implements DragSource, View.OnClickListener,
         View.OnLongClickListener, DropTarget, FolderListener, TextView.OnEditorActionListener,
-        View.OnFocusChangeListener, DragListener, UninstallSource, AccessibilityDragSource,
+        View.OnFocusChangeListener, DragListener, AccessibilityDragSource,
         Stats.LaunchSourceProvider {
     private static final String TAG = "Launcher.Folder";
 
@@ -873,19 +873,19 @@ public class Folder extends LinearLayout implements DragSource, View.OnClickList
 
     }
 
-    @Override
-    public void deferCompleteDropAfterUninstallActivity() {
-        mDeferDropAfterUninstall = true;
-    }
-
-    @Override
-    public void onUninstallActivityReturned(boolean success) {
-        mDeferDropAfterUninstall = false;
-        mUninstallSuccessful = success;
-        if (mDeferredAction != null) {
-            mDeferredAction.run();
-        }
-    }
+//    @Override
+//    public void deferCompleteDropAfterUninstallActivity() {
+//        mDeferDropAfterUninstall = true;
+//    }
+//
+//    @Override
+//    public void onUninstallActivityReturned(boolean success) {
+//        mDeferDropAfterUninstall = false;
+//        mUninstallSuccessful = success;
+//        if (mDeferredAction != null) {
+//            mDeferredAction.run();
+//        }
+//    }
 
     @Override
     public float getIntrinsicIconScaleFactor() {

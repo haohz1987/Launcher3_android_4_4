@@ -63,7 +63,7 @@ import com.android.launcher3.FolderIcon.FolderRingAnimator;
 import com.android.launcher3.Launcher.CustomContentCallbacks;
 import com.android.launcher3.Launcher.LauncherOverlay;
 import com.android.launcher3.LauncherSettings.Favorites;
-import com.android.launcher3.UninstallDropTarget.UninstallSource;
+//import com.android.launcher3.UninstallDropTarget.UninstallSource;
 import com.android.launcher3.accessibility.LauncherAccessibilityDelegate;
 import com.android.launcher3.accessibility.LauncherAccessibilityDelegate.AccessibilityDragSource;
 import com.android.launcher3.accessibility.OverviewScreenAccessibilityDelegate;
@@ -87,7 +87,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Workspace extends PagedView
         implements DropTarget, DragSource, DragScroller, View.OnTouchListener,
         DragController.DragListener, LauncherTransitionable, ViewGroup.OnHierarchyChangeListener,
-        Insettable, UninstallSource, AccessibilityDragSource, Stats.LaunchSourceProvider {
+        Insettable, AccessibilityDragSource, Stats.LaunchSourceProvider {
     private static final String TAG = "Launcher.Workspace";
 
     private static boolean ENFORCE_DRAG_EVENT_ORDER = false;
@@ -3805,20 +3805,20 @@ public class Workspace extends PagedView
         }
     }
 
-    @Override
-    public void deferCompleteDropAfterUninstallActivity() {
-        mDeferDropAfterUninstall = true;
-    }
-
-    /// maybe move this into a smaller part
-    @Override
-    public void onUninstallActivityReturned(boolean success) {
-        mDeferDropAfterUninstall = false;
-        mUninstallSuccessful = success;
-        if (mDeferredAction != null) {
-            mDeferredAction.run();
-        }
-    }
+//    @Override
+//    public void deferCompleteDropAfterUninstallActivity() {
+//        mDeferDropAfterUninstall = true;
+//    }
+//
+//    /// maybe move this into a smaller part
+//    @Override
+//    public void onUninstallActivityReturned(boolean success) {
+//        mDeferDropAfterUninstall = false;
+//        mUninstallSuccessful = success;
+//        if (mDeferredAction != null) {
+//            mDeferredAction.run();
+//        }
+//    }
 
     void updateItemLocationsInDatabase(CellLayout cl) {
         int count = cl.getShortcutsAndWidgets().getChildCount();

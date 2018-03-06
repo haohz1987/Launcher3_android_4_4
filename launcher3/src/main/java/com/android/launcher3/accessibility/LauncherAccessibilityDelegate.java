@@ -34,7 +34,7 @@ import com.android.launcher3.LauncherSettings;
 import com.android.launcher3.PendingAddItemInfo;
 import com.android.launcher3.R;
 import com.android.launcher3.ShortcutInfo;
-import com.android.launcher3.UninstallDropTarget;
+//import com.android.launcher3.UninstallDropTarget;
 import com.android.launcher3.Workspace;
 import com.android.launcher3.util.Thunk;
 
@@ -78,8 +78,8 @@ public class LauncherAccessibilityDelegate extends AccessibilityDelegate impleme
                 launcher.getText(R.string.delete_target_label)));
         mActions.put(INFO, new AccessibilityAction(INFO,
                 launcher.getText(R.string.info_target_label)));
-        mActions.put(UNINSTALL, new AccessibilityAction(UNINSTALL,
-                launcher.getText(R.string.delete_target_uninstall_label)));
+//        mActions.put(UNINSTALL, new AccessibilityAction(UNINSTALL,
+//                launcher.getText(R.string.delete_target_uninstall_label)));
         mActions.put(ADD_TO_WORKSPACE, new AccessibilityAction(ADD_TO_WORKSPACE,
                 launcher.getText(R.string.action_add_to_workspace)));
         mActions.put(MOVE, new AccessibilityAction(MOVE,
@@ -99,9 +99,9 @@ public class LauncherAccessibilityDelegate extends AccessibilityDelegate impleme
         if (DeleteDropTarget.supportsDrop(item)) {
             info.addAction(mActions.get(REMOVE));
         }
-        if (UninstallDropTarget.supportsDrop(host.getContext(), item)) {
-            info.addAction(mActions.get(UNINSTALL));
-        }
+//        if (UninstallDropTarget.supportsDrop(host.getContext(), item)) {
+//            info.addAction(mActions.get(UNINSTALL));
+//        }
         if (InfoDropTarget.supportsDrop(host.getContext(), item)) {
             info.addAction(mActions.get(INFO));
         }
@@ -142,9 +142,11 @@ public class LauncherAccessibilityDelegate extends AccessibilityDelegate impleme
         } else if (action == INFO) {
             InfoDropTarget.startDetailsActivityForInfo(item, mLauncher);
             return true;
-        } else if (action == UNINSTALL) {
-            return UninstallDropTarget.startUninstallActivity(mLauncher, item);
-        } else if (action == MOVE) {
+        }
+//        else if (action == UNINSTALL) {
+//            return UninstallDropTarget.startUninstallActivity(mLauncher, item);
+//        }
+        else if (action == MOVE) {
             beginAccessibleDrag(host, item);
         } else if (action == ADD_TO_WORKSPACE) {
             final int[] coordinates = new int[2];
@@ -289,7 +291,7 @@ public class LauncherAccessibilityDelegate extends AccessibilityDelegate impleme
                 sizeRange.left, sizeRange.top, sizeRange.right, sizeRange.bottom);
         host.requestLayout();
         LauncherModel.updateItemInDatabase(mLauncher, info);
-        announceConfirmation(mLauncher.getString(R.string.widget_resized, info.spanX, info.spanY));
+//        announceConfirmation(mLauncher.getString(R.string.widget_resized, info.spanX, info.spanY));
     }
 
     @Thunk void announceConfirmation(int resId) {
