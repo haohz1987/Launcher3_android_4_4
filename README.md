@@ -6,7 +6,9 @@ Launcher3
 
 1.结构模块
 
-![img](https://github.com/haohz1987/Launcher3_android_4_4/blob/modify/img/1%E7%BB%93%E6%9E%84%E6%A8%A1%E5%9D%97_launcher3.png)
+![img](https://github.com/haohz1987/Launcher3_android_4_4/blob/modify/img/1.1%E7%BB%93%E6%9E%84%E6%A8%A1%E5%9D%97_launcher3.png)
+
+![img](https://github.com/haohz1987/Launcher3_android_4_4/blob/modify/img/1.2%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84_launcher3.png)
 
 2.launcher视图
 
