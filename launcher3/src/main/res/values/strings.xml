@@ -31,21 +31,21 @@
     <string name="receive_first_load_broadcast_permission" translatable="false">com.android.launcher3.permission.RECEIVE_FIRST_LOAD_BROADCAST</string>
 
     <!-- Application name -->
-    <string name="app_name">Launcher3</string>
+    <string name="app_name">桌面</string>
     <!-- Default folder name -->
-    <string name="folder_name"></string>
+    <string name="folder_name">文件夹</string>
     <!-- Work folder name -->
-    <string name="work_folder_name">Work</string>
+    <string name="work_folder_name">工作</string>
     <!-- Displayed when user selects a shortcut for an app that was uninstalled [CHAR_LIMIT=none]-->
-    <string name="activity_not_found">App isn\'t installed.</string>
+    <string name="activity_not_found">App 不能卸载.</string>
     <!-- Displayed when user selects a shortcut for an app that is current not available [CHAR_LIMIT=none]-->
-    <string name="activity_not_available">App isn\'t available</string>
+    <string name="activity_not_available">App 不可用</string>
     <!-- SafeMode shortcut error string -->
-    <string name="safemode_shortcut_error">Downloaded app disabled in Safe mode</string>
+    <string name="safemode_shortcut_error">安全模式不能下载app</string>
     <!-- SafeMode widget error string -->
-    <string name="safemode_widget_error">Widgets disabled in Safe mode</string>
+    <string name="safemode_widget_error">安全模式下控件不可用</string>
 
-    <string name="toggle_weight_watcher">Show Mem</string>
+    <string name="toggle_weight_watcher">显示缓存</string>
 
     <!-- Widgets -->
     <!-- Message to tell the user to press and hold on a widget to add it [CHAR_LIMIT=50] -->
@@ -55,71 +55,67 @@
     <string name="widget_dims_format">%1$d \u00d7 %2$d</string>
 
     <!-- All Apps -->
-    <!-- Search bar text in the apps view. [CHAR_LIMIT=50] -->
-    <string name="all_apps_search_bar_hint">Search Apps</string>
-    <!-- Loading apps text. [CHAR_LIMIT=50] -->
-    <string name="all_apps_loading_message">Loading Apps&#8230;</string>
+    <!-- Search bar text in the apps view. [CHAR_LIMIT=50]Search Apps -->
+    <string name="all_apps_search_bar_hint">搜索apps</string>
+    <string name="all_apps_loading_message">正在下载 Apps&#8230;</string>
     <!-- No-search-results text. [CHAR_LIMIT=50] -->
-    <string name="all_apps_no_search_results">No Apps found matching \"<xliff:g id="query" example="Android">%1$s</xliff:g>\"</string>
+    <string name="all_apps_no_search_results">没有匹配的Apps \"<xliff:g id="query" example="Android">%1$s</xliff:g>\"</string>
     <!-- Search market text.  This is a format string where the first argument is the name of the activity
          handling the search.  The format string does not need to handle both of these arguments. [CHAR_LIMIT=50] -->
-    <string name="all_apps_search_market_message">Go to <xliff:g id="query" example="Play Store">%1$s</xliff:g></string>
+    <string name="all_apps_search_market_message">转到 <xliff:g id="query" example="Play Store">%1$s</xliff:g></string>
 
     <!-- Drag and drop -->
     <skip />
     <!-- Error message when user has filled a home screen -->
-    <string name="out_of_space">No more room on this Home screen.</string>
+    <string name="out_of_space">当前屏幕没有更多空间.</string>
     <!-- Error message when user has filled the hotseat -->
-    <string name="hotseat_out_of_space">No more room in the Favorites tray</string>
+    <string name="hotseat_out_of_space">收藏夹没有更多空间</string>
 
     <!-- All applications label -->
     <string name="all_apps_button_label">Apps</string>
     <!-- Label for button in all applications label to go back home (to the workspace / desktop)
          for accessibilty (spoken when the button gets focus). -->
-    <string name="all_apps_home_button_label">Home</string>
+    <string name="all_apps_home_button_label">首页</string>
 
     <!-- Label for delete drop target. [CHAR_LIMIT=20] -->
-    <string name="delete_target_label">Remove</string>
+    <string name="delete_target_label">删除</string>
     <!-- Label for uninstall drop target. [CHAR_LIMIT=20]-->
-    <string name="delete_target_uninstall_label">Uninstall</string>
+    <string name="delete_target_uninstall_label">卸载</string>
     <!-- Label for the info icon. [CHAR_LIMIT=20] -->
-    <string name="info_target_label">App info</string>
+    <string name="info_target_label">App 信息</string>
 
     <!-- Permissions: -->
     <skip />
     <!-- Permission short label -->
-    <string name="permlab_install_shortcut">install shortcuts</string>
+    <string name="permlab_install_shortcut">安装快照</string>
     <!-- Permission description -->
-    <string name="permdesc_install_shortcut">Allows an app to add
-        shortcuts without user intervention.</string>
+    <string name="permdesc_install_shortcut">允许没有用户干预的app添加快照</string>
     <!-- Permission short label -->
-    <string name="permlab_read_settings">read Home settings and shortcuts</string>
+    <string name="permlab_read_settings">读取首页设置和快照</string>
     <!-- Permission description -->
-    <string name="permdesc_read_settings">Allows the app to read the settings and
-        shortcuts in Home.</string>
+    <string name="permdesc_read_settings">允许app读取首页设置和快照</string>
     <!-- Permission short label -->
-    <string name="permlab_write_settings">write Home settings and shortcuts</string>
+    <string name="permlab_write_settings">写首页设置和快照</string>
     <!-- Permission description -->
-    <string name="permdesc_write_settings">Allows the app to change the settings and
-        shortcuts in Home.</string>
+    <string name="permdesc_write_settings">允许app改变首页设置和快照</string>
 
     <!-- Toast shown on clicking a direct call shortcut. [CHAR_LIMIT=80] -->
-    <string name="msg_no_phone_permission"><xliff:g id="app_name" example="Launcher3">%1$s</xliff:g> is not allowed to make phone calls</string>
+    <string name="msg_no_phone_permission"><xliff:g id="app_name" example="Launcher3">%1$s</xliff:g> 不允许打电话</string>
 
     <!-- Widgets: -->
     <skip />    
 
     <!-- Text to show user in place of a gadget when we can't display it properly -->
-    <string name="gadget_error_text">Problem loading widget</string>
+    <string name="gadget_error_text">控件下载中的问题</string>
 
     <!-- Text to show user in place of a gadget when it is not yet initialized. -->
-    <string name="gadget_setup_text">Setup</string>
+    <string name="gadget_setup_text">安装</string>
 
     <!-- Text to inform the user that they can't uninstall a system application -->
-    <string name="uninstall_system_app_text">This is a system app and can\'t be uninstalled.</string>
+    <string name="uninstall_system_app_text">系统程序不能卸载</string>
 
     <!-- Default folder title -->
-    <string name="folder_hint_text">Unnamed Folder</string>
+    <string name="folder_hint_text">文件夹未命名</string>
 
     <!-- Accessibility -->
     <skip />
@@ -131,137 +127,136 @@
 
     <!-- Clings -->
     <!-- The title text for the workspace cling [CHAR_LIMIT=30] -->
-    <string name="first_run_cling_title">Welcome</string>
+    <string name="first_run_cling_title">欢迎</string>
     <!-- The title text for the migration cling [CHAR_LIMIT=30] -->
-    <string name="migration_cling_title">Copy your app icons</string>
+    <string name="migration_cling_title">复制app图标</string>
     <!-- The description of what migration does [CHAR_LIMIT=70] -->
-    <string name="migration_cling_description">Import icons and folders from your old Home screens?</string>
+    <string name="migration_cling_description">是否从原来首页复制图标和文件夹？</string>
     <!-- The description of the button to migrate apps from another launcher [CHAR_LIMIT=30] -->
-    <string name="migration_cling_copy_apps">COPY ICONS</string>
+    <string name="migration_cling_copy_apps">复制图标</string>
     <!-- The description of the button to use the default launcher layout [CHAR_LIMIT=30] -->
-    <string name="migration_cling_use_default">START FRESH</string>
+    <string name="migration_cling_use_default">开始刷新</string>
     <!-- The title text for workspace longpress action [CHAR_LIMIT=40] -->
-    <string name="workspace_cling_longpress_title">Wallpapers, widgets, &amp; settings</string>
+    <string name="workspace_cling_longpress_title">壁纸，组件和设置</string>
     <!-- The description of how to use the workspace [CHAR_LIMIT=70] -->
-    <string name="workspace_cling_longpress_description">Touch &amp; hold background to customize</string>
+    <string name="workspace_cling_longpress_description">触摸保持背景定制</string>
     <!-- The description of the button to dismiss the cling [CHAR_LIMIT=30] -->
-    <string name="workspace_cling_longpress_dismiss">GOT IT</string>
+    <string name="workspace_cling_longpress_dismiss">明白了</string>
 
     <!-- Folder accessibility -->
     <!-- The format string for when a folder is opened, speaks the dimensions -->
-    <string name="folder_opened">Folder opened, <xliff:g id="width" example="5">%1$d</xliff:g> by <xliff:g id="height" example="3">%2$d</xliff:g></string>
+    <string name="folder_opened">文件夹打开, <xliff:g id="width" example="5">%1$d</xliff:g> by <xliff:g id="height" example="3">%2$d</xliff:g></string>
     <!-- Instruction that clicking outside will close folder -->
-    <string name="folder_tap_to_close">Touch to close folder</string>
+    <string name="folder_tap_to_close">关闭文件夹</string>
     <!-- Instruction that clicking outside will commit folder rename -->
-    <string name="folder_tap_to_rename">Touch to save rename</string>
+    <string name="folder_tap_to_rename">保存重命名</string>
     <!-- Indication that folder closed -->
-    <string name="folder_closed">Folder closed</string>
+    <string name="folder_closed">文件夹已关闭</string>
     <!-- Folder renamed format -->
-    <string name="folder_renamed">Folder renamed to <xliff:g id="name" example="Games">%1$s</xliff:g></string>
+    <string name="folder_renamed">文件夹重命名 <xliff:g id="name" example="Games">%1$s</xliff:g></string>
     <!-- Folder name format -->
-    <string name="folder_name_format">Folder: <xliff:g id="name" example="Games">%1$s</xliff:g></string>
+    <string name="folder_name_format">文件夹: <xliff:g id="name" example="Games">%1$s</xliff:g></string>
 
     <!-- Debug-only activity name. [DO NOT TRANSLATE] -->
-    <string name="debug_memory_activity">* HPROF</string>
+    <string name="debug_memory_activity">* HPROF(性能调优工具)</string>
 
     <!-- Strings for the customization mode -->
     <!-- Text for widget add button -->
-    <string name="widget_button_text">Widgets</string>
+    <string name="widget_button_text">控件</string>
     <!-- Text for wallpaper change button -->
-    <string name="wallpaper_button_text">Wallpapers</string>
+    <string name="wallpaper_button_text">壁纸</string>
     <!-- Text for settings button -->
-    <string name="settings_button_text">Settings</string>
+    <string name="settings_button_text">设置</string>
 
     <!-- Strings for settings -->
     <!-- Title for Allow Rotation setting. [CHAR LIMIT=50] -->
-    <string name="allow_rotation_title">Allow rotation</string>
+    <string name="allow_rotation_title">允许旋转</string>
 
     <!-- Label on an icon that references an uninstalled package, for which we have no information about when it might be installed. [CHAR_LIMIT=15] -->
-    <string name="package_state_unknown">Unknown</string>
+    <string name="package_state_unknown">不能识别</string>
 
     <!-- Button for abandoned promises dialog, to removes this abandoned promise icon. -->
-    <string name="abandoned_clean_this">Remove</string>
+    <string name="abandoned_clean_this">清除</string>
     <!-- Button for abandoned promise dialog, to search in the market for the missing package. -->
-    <string name="abandoned_search">Search</string>
+    <string name="abandoned_search">搜索</string>
     <!-- Title for abandoned promise dialog. -->
-    <string name="abandoned_promises_title">This app is not installed</string>
+    <string name="abandoned_promises_title">app不能卸载</string>
     <!-- Explanation for abandoned promise dialog. "The first 'it' refers to the shortcut icon.
     The second "it" refers to the app. -->
-    <string name="abandoned_promise_explanation">The app for this icon isn\'t installed.
-        You can remove it, or search for the app and install it manually.
+    <string name="abandoned_promise_explanation">app不能安装，你可以删除或者手动搜索安装
     </string>
 
 <!-- Strings for accessibility actions -->
     <!-- Accessibility action to add an app to workspace. [CHAR_LIMIT=30] -->
-    <string name="action_add_to_workspace">Add to Home screen</string>
+    <string name="action_add_to_workspace">添加到主界面</string>
 
     <!-- Accessibility action to move item to the current location. [CHAR_LIMIT=30] -->
-    <string name="action_move_here">Move item here</string>
+    <string name="action_move_here">组件移动到这</string>
 
     <!-- Accessibility confirmation for item added to workspace. -->
-    <string name="item_added_to_workspace">Item added to home screen</string>
+    <string name="item_added_to_workspace">添加组件到主界面</string>
 
     <!-- Accessibility confirmation for item removed. -->
-    <string name="item_removed">Item removed</string>
+    <string name="item_removed">组件已删除</string>
 
     <!-- Accessibility action to move an item on the workspace. [CHAR_LIMIT=30] -->
-    <string name="action_move">Move item</string>
+    <string name="action_move">移动组件</string>
 
     <!-- Accessibility description to move item to empty cell. -->
-    <string name="move_to_empty_cell">Move to row <xliff:g id="number" example="1">%1$s</xliff:g> column <xliff:g id="number" example="1">%2$s</xliff:g></string>
+    <string name="move_to_empty_cell">移动到列 <xliff:g id="number" example="1">%1$s</xliff:g> column <xliff:g id="number" example="1">%2$s</xliff:g></string>
 
     <!-- Accessibility description to move item inside a folder. -->
-    <string name="move_to_position">Move to position <xliff:g id="number" example="1">%1$s</xliff:g></string>
+    <string name="move_to_position">移动到位置 <xliff:g id="number" example="1">%1$s</xliff:g></string>
 
     <!-- Accessibility description to move item to the hotseat. -->
-    <string name="move_to_hotseat_position">Move to favorites position <xliff:g id="number" example="1">%1$s</xliff:g></string>
+    <string name="move_to_hotseat_position">移动到收藏夹 <xliff:g id="number" example="1">%1$s</xliff:g></string>
 
     <!-- Accessibility confirmation for item move. -->
-    <string name="item_moved">Item moved</string>
+    <string name="item_moved">组件已移动</string>
 
     <!-- Accessibility description to move item into an existing folder. -->
-    <string name="add_to_folder">Add to folder: <xliff:g id="name" example="Games">%1$s</xliff:g></string>
+    <string name="add_to_folder">添加到文件夹: <xliff:g id="name" example="Games">%1$s</xliff:g></string>
 
     <!-- Accessibility description to move item into an existing folder containing an app. -->
-    <string name="add_to_folder_with_app">Add to folder with <xliff:g id="name" example="Messenger">%1$s</xliff:g></string>
+    <string name="add_to_folder_with_app">添加文件夹 <xliff:g id="name" example="Messenger">%1$s</xliff:g></string>
 
     <!-- Accessibility confirmation for item added to folder. -->
-    <string name="added_to_folder">Item added to folder</string>
+    <string name="added_to_folder">组件已添加到文件夹</string>
 
     <!-- Accessibility description to create folder with another item. -->
-    <string name="create_folder_with">Create folder with: <xliff:g id="name" example="Game">%1$s</xliff:g></string>
+    <string name="create_folder_with">新建文件夹: <xliff:g id="name" example="Game">%1$s</xliff:g></string>
 
     <!-- Accessibility confirmation for folder created. -->
-    <string name="folder_created">Folder created</string>
+    <string name="folder_created">文件夹已创建</string>
 
     <!-- Accessibility action to move an item from folder to workspace. [CHAR_LIMIT=30] -->
-    <string name="action_move_to_workspace">Move to Home screen</string>
+    <string name="action_move_to_workspace">移动到主屏</string>
 
     <!-- Accessibility action to move an homescreen to the left. [CHAR_LIMIT=30] -->
-    <string name="action_move_screen_left">Move screen to left</string>
+    <string name="action_move_screen_left">向左移动屏幕</string>
 
     <!-- Accessibility action to move an homescreen to the right. [CHAR_LIMIT=30] -->
-    <string name="action_move_screen_right">Move screen to right</string>
+    <string name="action_move_screen_right">向右移动屏幕</string>
 
     <!-- Accessibility confirmation when a screen was moved. -->
-    <string name="screen_moved">Screen moved</string>
+    <string name="screen_moved">屏幕已移动</string>
 
     <!-- Accessibility action to resize a widget. [CHAR_LIMIT=30] -->
-    <string name="action_resize">Resize</string>
+    <string name="action_resize">修改尺寸</string>
 
     <!-- Accessibility action to increase width of a widget. [CHAR_LIMIT=30] -->
-    <string name="action_increase_width">Increase width</string>
+    <string name="action_increase_width">增加宽度</string>
 
     <!-- Accessibility action to increase height of a widget. [CHAR_LIMIT=30] -->
-    <string name="action_increase_height">Increase height</string>
+    <string name="action_increase_height">增加高度</string>
 
     <!-- Accessibility action to decrease width of a widget. [CHAR_LIMIT=30] -->
-    <string name="action_decrease_width">Decrease width</string>
+    <string name="action_decrease_width">减少宽度</string>
 
     <!-- Accessibility action to decrease height of a widget. [CHAR_LIMIT=30] -->
-    <string name="action_decrease_height">Decrease height</string>
+    <string name="action_decrease_height">减少高度</string>
 
     <!-- Accessibility confirmation for widget resize. -->
-    <string name="widget_resized">Widget resized to width <xliff:g id="number" example="2">%1$s</xliff:g> height <xliff:g id="number" example="1">%2$s</xliff:g></string>
+    <string name="widget_resized">组件修改宽度 <xliff:g id="number" example="2">%1$s</xliff:g> 高度 <xliff:g id="number" example="1">%2$s</xliff:g></string>
 
 </resources>
