@@ -1,6 +1,10 @@
 Launcher3
 =========
 [博客地址](http://blog.csdn.net/dingfengnupt88/article/details/51800057?locationNum=15)
+>流程图
+
+![img]https://github.com/haohz1987/Launcher3_android_4_4/blob/modify/img/1%E7%BB%93%E6%9E%84%E6%A8%A1%E5%9D%97_launcher3.png
+
 >类的定义
 
 Launcher：主界面Activity，最核心且唯一的Activity。
