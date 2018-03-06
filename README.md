@@ -3,7 +3,29 @@ Launcher3
 [博客地址](http://blog.csdn.net/dingfengnupt88/article/details/51800057?locationNum=15)
 >流程图
 
-![img]https://github.com/haohz1987/Launcher3_android_4_4/blob/modify/img/1%E7%BB%93%E6%9E%84%E6%A8%A1%E5%9D%97_launcher3.png
+结构模块
+
+![img](https://github.com/haohz1987/Launcher3_android_4_4/blob/modify/img/1%E7%BB%93%E6%9E%84%E6%A8%A1%E5%9D%97_launcher3.png)
+
+launcher视图
+
+![img](https://github.com/haohz1987/Launcher3_android_4_4/blob/modify/img/2%E8%A7%86%E5%9B%BE_launcher3.png)
+
+状态
+
+![img](https://github.com/haohz1987/Launcher3_android_4_4/blob/modify/img/3%E7%8A%B6%E6%80%81_launcher3.png)
+
+启动主流程的加载
+
+![img](https://github.com/haohz1987/Launcher3_android_4_4/blob/modify/img/4launcher%E5%90%AF%E5%8A%A8%E4%B8%BB%E6%B5%81%E7%A8%8B%E7%9A%84%E5%8A%A0%E8%BD%BD_launcher3.png)
+
+workspace的加载绑定流程
+
+![img](https://github.com/haohz1987/Launcher3_android_4_4/blob/modify/img/5workspace%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%BB%91%E5%AE%9A%E6%B5%81%E7%A8%8B_launcher3.png)
+
+AlApps和Widget的加载流程
+
+![img](https://github.com/haohz1987/Launcher3_android_4_4/blob/modify/img/6AllApps%E5%92%8CWidget%E7%9A%84%E5%8A%A0%E8%BD%BD%E6%B5%81%E7%A8%8B_launcher3.png)
 
 >类的定义
 
