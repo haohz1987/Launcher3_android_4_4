@@ -263,7 +263,6 @@ public class Launcher extends Activity
     private int[] mTmpAddItemCellCoordinates = new int[2];
 
     @Thunk Hotseat mHotseat;
-    private ViewGroup mOverviewPanel;
 
     private View mAllAppsButton;
     private View mWidgetsButton;
@@ -461,7 +460,7 @@ public class Launcher extends Activity
         // 获取IconCache对象，在LauncherAppState已经初始化
         mIconCache = app.getIconCache();
 
-//      mIconCache.flushInvalidIcons(grid);// 清除尺寸不符的icon缓存对象,未找到此方法
+//        mIconCache.flushInvalidIcons(grid);// 清除尺寸不符的icon缓存对象,未找到此方法
 
         // 初始化DragController对象，DragController用来处理拖拽操作
         mDragController = new DragController(this);
@@ -1415,7 +1414,6 @@ public class Launcher extends Activity
             mHotseat.setOnLongClickListener(this);
         }
 
-        mOverviewPanel = (ViewGroup) findViewById(R.id.overview_panel);
         mWidgetsButton = findViewById(R.id.widget_button);
         mWidgetsButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -1427,35 +1425,9 @@ public class Launcher extends Activity
         });
         mWidgetsButton.setOnTouchListener(getHapticFeedbackTouchListener());
 
-//        View wallpaperButton = findViewById(R.id.wallpaper_button);
-//        wallpaperButton.setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View arg0) {
-//                if (!mWorkspace.isSwitchingState()) {
-//                    onClickWallpaperPicker(arg0);
-//                }
-//            }
-//        });
-//        wallpaperButton.setOnTouchListener(getHapticFeedbackTouchListener());
-
-//        View settingsButton = findViewById(R.id.settings_button);
-//        if (hasSettings()) {
-//            settingsButton.setOnClickListener(new OnClickListener() {
-//                @Override
-//                public void onClick(View arg0) {
-//                    if (!mWorkspace.isSwitchingState()) {
-//                        onClickSettingsButton(arg0);
-//                    }
-//                }
-//            });
-//            settingsButton.setOnTouchListener(getHapticFeedbackTouchListener());
-//        } else {
-//            settingsButton.setVisibility(View.GONE);
-//        }
-
-        mOverviewPanel.setAlpha(0f);
 
         // Setup the workspace
+        //使其在触摸的时候没有触感反馈。接着设置长按事件的监听。
         mWorkspace.setHapticFeedbackEnabled(false);
         mWorkspace.setOnLongClickListener(this);
         mWorkspace.setup(dragController);
@@ -1866,10 +1838,6 @@ public class Launcher extends Activity
 
     public Hotseat getHotseat() {
         return mHotseat;
-    }
-
-    public ViewGroup getOverviewPanel() {
-        return mOverviewPanel;
     }
 
     public SearchDropTargetBar getSearchDropTargetBar() {

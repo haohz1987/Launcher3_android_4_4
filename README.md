@@ -122,3 +122,11 @@ adb shell dumpsys meminfo实现原理
 
 ![img](https://github.com/haohz1987/Launcher3_android_4_4/blob/modify/img/7adb%20shell%20dumpsys%20meminfo%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86.png)
 
+>修改页面初始化
+
+修改资源文件default_workspace_4*5.xml **,dw_phone_hotseat.xml,dw_table_hotseat.xml
+OverviewPanel壁纸选择部分代码
+
+
+
+

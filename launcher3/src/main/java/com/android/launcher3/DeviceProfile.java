@@ -29,7 +29,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
-import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
@@ -462,47 +461,8 @@ public class DeviceProfile {
                 pageIndicator.setLayoutParams(lp);
             }
         }
-
-        // Layout the Overview Mode
-        ViewGroup overviewMode = launcher.getOverviewPanel();
-        if (overviewMode != null) {
-            int overviewButtonBarHeight = getOverviewModeButtonBarHeight();
-            lp = (FrameLayout.LayoutParams) overviewMode.getLayoutParams();
-            lp.gravity = Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM;
-
-            int visibleChildCount = getVisibleChildCount(overviewMode);
-            int totalItemWidth = visibleChildCount * overviewModeBarItemWidthPx;
-            int maxWidth = totalItemWidth + (visibleChildCount-1) * overviewModeBarSpacerWidthPx;
-
-            lp.width = Math.min(availableWidthPx, maxWidth);
-            lp.height = overviewButtonBarHeight;
-            overviewMode.setLayoutParams(lp);
-
-            if (lp.width > totalItemWidth && visibleChildCount > 1) {
-                // We have enough space. Lets add some margin too.
-                int margin = (lp.width - totalItemWidth) / (visibleChildCount-1);
-                View lastChild = null;
-
-                // Set margin of all visible children except the last visible child
-                for (int i = 0; i < visibleChildCount; i++) {
-                    if (lastChild != null) {
-                        MarginLayoutParams clp = (MarginLayoutParams) lastChild.getLayoutParams();
-                        if (isLayoutRtl) {
-                            clp.leftMargin = margin;
-                        } else {
-                            clp.rightMargin = margin;
-                        }
-                        lastChild.setLayoutParams(clp);
-                        lastChild = null;
-                    }
-                    View thisChild = overviewMode.getChildAt(i);
-                    if (thisChild.getVisibility() != View.GONE) {
-                        lastChild = thisChild;
-                    }
-                }
-            }
-        }
     }
+
 
     private int getCurrentWidth() {
         return isLandscape
