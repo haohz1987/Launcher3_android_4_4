@@ -71,7 +71,7 @@ public class SearchDropTargetBar extends FrameLayout implements DragController.D
     @Thunk boolean mAccessibilityEnabled = false;
 
     // Drop targets
-    private ButtonDropTarget mInfoDropTarget;
+//    private ButtonDropTarget mInfoDropTarget;
     private ButtonDropTarget mDeleteDropTarget;
 //    private ButtonDropTarget mUninstallDropTarget;
 
@@ -87,15 +87,15 @@ public class SearchDropTargetBar extends FrameLayout implements DragController.D
         dragController.addDragListener(this);
         dragController.setFlingToDeleteDropTarget(mDeleteDropTarget);
 
-        dragController.addDragListener(mInfoDropTarget);
+//        dragController.addDragListener(mInfoDropTarget);
         dragController.addDragListener(mDeleteDropTarget);
 //        dragController.addDragListener(mUninstallDropTarget);
 
-        dragController.addDropTarget(mInfoDropTarget);
+//        dragController.addDropTarget(mInfoDropTarget);
         dragController.addDropTarget(mDeleteDropTarget);
 //        dragController.addDropTarget(mUninstallDropTarget);
 
-        mInfoDropTarget.setLauncher(launcher);
+//        mInfoDropTarget.setLauncher(launcher);
         mDeleteDropTarget.setLauncher(launcher);
 //        mUninstallDropTarget.setLauncher(launcher);
     }
@@ -106,12 +106,12 @@ public class SearchDropTargetBar extends FrameLayout implements DragController.D
 
         // Get the individual components
         mDropTargetBar = findViewById(R.id.drag_target_bar);
-        mInfoDropTarget = (ButtonDropTarget) mDropTargetBar.findViewById(R.id.info_target_text);
+//        mInfoDropTarget = (ButtonDropTarget) mDropTargetBar.findViewById(R.id.info_target_text);
         mDeleteDropTarget = (ButtonDropTarget) mDropTargetBar.findViewById(R.id.delete_target_text);
 
 //        mUninstallDropTarget = (ButtonDropTarget) mDropTargetBar.findViewById(R.id.uninstall_target_text);
 
-        mInfoDropTarget.setSearchDropTargetBar(this);
+//        mInfoDropTarget.setSearchDropTargetBar(this);
         mDeleteDropTarget.setSearchDropTargetBar(this);
 //        mUninstallDropTarget.setSearchDropTargetBar(this);
 
@@ -250,7 +250,7 @@ public class SearchDropTargetBar extends FrameLayout implements DragController.D
         if (mQSB != null) {
             mQSB.setVisibility(enable ? View.GONE : View.VISIBLE);
         }
-        mInfoDropTarget.enableAccessibleDrag(enable);
+//        mInfoDropTarget.enableAccessibleDrag(enable);
         mDeleteDropTarget.enableAccessibleDrag(enable);
 //        mUninstallDropTarget.enableAccessibleDrag(enable);
     }

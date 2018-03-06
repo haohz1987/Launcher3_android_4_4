@@ -36,7 +36,7 @@ public interface DragSource {
     /**
      * @return whether items dragged from this source supports 'App Info'
      */
-    boolean supportsAppInfoDropTarget();
+//    boolean supportsAppInfoDropTarget();
 
     /**
      * @return whether items dragged from this source supports 'Delete' drop target (e.g. to remove

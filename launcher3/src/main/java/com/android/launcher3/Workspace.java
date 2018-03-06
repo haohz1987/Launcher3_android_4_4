@@ -3894,10 +3894,10 @@ public class Workspace extends PagedView
         return true;
     }
 
-    @Override
-    public boolean supportsAppInfoDropTarget() {
-        return false;
-    }
+//    @Override
+//    public boolean supportsAppInfoDropTarget() {
+//        return false;
+//    }
 
     @Override
     public boolean supportsDeleteDropTarget() {

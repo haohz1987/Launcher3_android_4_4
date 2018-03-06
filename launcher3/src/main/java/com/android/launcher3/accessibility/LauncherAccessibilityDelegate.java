@@ -24,7 +24,6 @@ import com.android.launcher3.DragController.DragListener;
 import com.android.launcher3.DragSource;
 import com.android.launcher3.Folder;
 import com.android.launcher3.FolderInfo;
-import com.android.launcher3.InfoDropTarget;
 import com.android.launcher3.ItemInfo;
 import com.android.launcher3.Launcher;
 import com.android.launcher3.LauncherAppWidgetHostView;
@@ -34,11 +33,12 @@ import com.android.launcher3.LauncherSettings;
 import com.android.launcher3.PendingAddItemInfo;
 import com.android.launcher3.R;
 import com.android.launcher3.ShortcutInfo;
-//import com.android.launcher3.UninstallDropTarget;
 import com.android.launcher3.Workspace;
 import com.android.launcher3.util.Thunk;
 
 import java.util.ArrayList;
+
+//import com.android.launcher3.UninstallDropTarget;
 
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
 public class LauncherAccessibilityDelegate extends AccessibilityDelegate implements DragListener {
@@ -102,9 +102,9 @@ public class LauncherAccessibilityDelegate extends AccessibilityDelegate impleme
 //        if (UninstallDropTarget.supportsDrop(host.getContext(), item)) {
 //            info.addAction(mActions.get(UNINSTALL));
 //        }
-        if (InfoDropTarget.supportsDrop(host.getContext(), item)) {
-            info.addAction(mActions.get(INFO));
-        }
+//        if (InfoDropTarget.supportsDrop(host.getContext(), item)) {
+//            info.addAction(mActions.get(INFO));
+//        }
 
         if ((item instanceof ShortcutInfo)
                 || (item instanceof LauncherAppWidgetInfo)
@@ -139,10 +139,11 @@ public class LauncherAccessibilityDelegate extends AccessibilityDelegate impleme
                 return true;
             }
             return false;
-        } else if (action == INFO) {
-            InfoDropTarget.startDetailsActivityForInfo(item, mLauncher);
-            return true;
         }
+//        else if (action == INFO) {
+//            InfoDropTarget.startDetailsActivityForInfo(item, mLauncher);
+//            return true;
+//        }
 //        else if (action == UNINSTALL) {
 //            return UninstallDropTarget.startUninstallActivity(mLauncher, item);
 //        }

@@ -39,17 +39,17 @@
                 android:text="@string/delete_target_label" />
         </FrameLayout>
 
-        <FrameLayout
-            style="@style/DropTargetButtonContainer"
-            android:layout_weight="1" >
+        <!--<FrameLayout-->
+            <!--style="@style/DropTargetButtonContainer"-->
+            <!--android:layout_weight="1" >-->
 
-            <!-- Info target -->
+            <!--&lt;!&ndash; Info target &ndash;&gt;-->
 
-            <com.android.launcher3.InfoDropTarget
-                android:id="@+id/info_target_text"
-                style="@style/DropTargetButton"
-                android:text="@string/info_target_label" />
-        </FrameLayout>
+            <!--<com.android.launcher3.InfoDropTarget-->
+                <!--android:id="@+id/info_target_text"-->
+                <!--style="@style/DropTargetButton"-->
+                <!--android:text="@string/info_target_label" />-->
+        <!--</FrameLayout>-->
 
         <!--<FrameLayout-->
             <!--style="@style/DropTargetButtonContainer"-->

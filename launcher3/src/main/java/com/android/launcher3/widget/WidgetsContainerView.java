@@ -16,6 +16,7 @@
 
 package com.android.launcher3.widget;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
@@ -97,6 +98,7 @@ public class WidgetsContainerView extends BaseContainerView
         }
     }
 
+    @SuppressLint("MissingSuperCall")
     @Override
     protected void onFinishInflate() {
         mContent = findViewById(R.id.content);
@@ -270,10 +272,10 @@ public class WidgetsContainerView extends BaseContainerView
         return false;
     }
 
-    @Override
-    public boolean supportsAppInfoDropTarget() {
-        return true;
-    }
+//    @Override
+//    public boolean supportsAppInfoDropTarget() {
+//        return true;
+//    }
 
     /*
      * Both this method and {@link #supportsFlingToDelete} has to return {@code false} for the

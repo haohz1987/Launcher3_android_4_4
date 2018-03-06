@@ -1840,6 +1840,7 @@ public class Launcher extends Activity
         return mHotseat;
     }
 
+
     public SearchDropTargetBar getSearchDropTargetBar() {
         return mSearchDropTargetBar;
     }
@@ -3481,8 +3482,8 @@ public class Launcher extends Activity
         if (mLauncherCallbacks != null) {
             List<ComponentKey> apps = mLauncherCallbacks.getPredictedApps();
             if (apps != null) {
-                LogT.w("尝试更新预装的app="+apps.toString());
 
+                LogT.w("尝试更新预装的app="+apps.toString());
                 mAppsView.setPredictedApps(apps);
             }
         }

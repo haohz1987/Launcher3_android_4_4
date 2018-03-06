@@ -479,10 +479,10 @@ public class AllAppsContainerView extends BaseContainerView implements DragSourc
         return true;
     }
 
-    @Override
-    public boolean supportsAppInfoDropTarget() {
-        return true;
-    }
+//    @Override
+//    public boolean supportsAppInfoDropTarget() {
+//        return true;
+//    }
 
     @Override
     public boolean supportsDeleteDropTarget() {
