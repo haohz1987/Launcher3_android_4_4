@@ -127,6 +127,22 @@ adb shell dumpsys meminfo实现原理
 修改资源文件default_workspace_4*5.xml **,dw_phone_hotseat.xml,dw_table_hotseat.xml
 OverviewPanel壁纸选择部分代码
 
+>显示允许的apk
+
+设置LauncherModel类中的loadAllApps()方法，
+      for (int i = 0; i < apps.size(); i++) {
+                    LauncherActivityInfoCompat app = apps.get(i);
+                    // This builds the icon bitmaps.
+//                    if("com.lenovo.ideafriend".equals(app.getApplicationInfo().packageName)||
+//                       "com.lenovo.email".equals(app.getApplicationInfo().packageName)
+//                       ){//不显示的包名
+//                        continue;
+//                    }
+                    if(app.getApplicationInfo().packageName.startsWith("com.handpay")
+                            || app.getApplicationInfo().packageName.equals("com.android.settings")){
+                        mBgAllAppsList.add(new AppInfo(mContext, app, user, mIconCache));
+                    }
+                }
 
 
 

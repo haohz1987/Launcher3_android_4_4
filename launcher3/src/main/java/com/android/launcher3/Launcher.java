@@ -140,7 +140,7 @@ public class Launcher extends Activity
     static final boolean PROFILE_STARTUP = false;
     static final boolean DEBUG_WIDGETS = true;
     //  打开严苛模式，可选监视UI线程和虚拟机策略,默认false
-    static final boolean DEBUG_STRICT_MODE = true;
+    static final boolean DEBUG_STRICT_MODE = false;
     static final boolean DEBUG_RESUME_TIME = false;
     static final boolean DEBUG_DUMP_LOG = false;
 
@@ -406,6 +406,7 @@ public class Launcher extends Activity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        LogT.w("关闭严苛模式");
         /* 严苛模式，它将报告与线程及虚拟机相关的策略违例。一旦检测到策略违例（policy violation），
         你将获得警告，其包含了一个栈trace显示你的应用在何处发生违例。你可以强制用警告代替崩溃（crash），
         也可以仅将警告计入日志，让你的应用继续执行。 */
@@ -3257,30 +3258,6 @@ public class Launcher extends Activity
         return (mState == State.WIDGETS) || (mOnResumeState == State.WIDGETS);
     }
 
-//    private void setWorkspaceBackground(int background) {
-//        switch (background) {
-//            case WORKSPACE_BACKGROUND_TRANSPARENT:
-//                getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//                break;
-//            case WORKSPACE_BACKGROUND_BLACK:
-//                getWindow().setBackgroundDrawable(null);
-//                break;
-//            default:
-//                getWindow().setBackgroundDrawable(mWorkspaceBackgroundDrawable);
-//        }
-//    }
-
-//    protected void changeWallpaperVisiblity(boolean visible) {
-//        int wpflags = visible ? WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER : 0;
-//        int curflags = getWindow().getAttributes().flags
-//                & WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER;
-//        if (wpflags != curflags) {
-//            getWindow().setFlags(wpflags, WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER);
-//        }
-//         /* 墙纸修改为始终为灰黑色 */
-//        getWindow().setBackgroundDrawable(new ColorDrawable(Color.DKGRAY));
-//    }
-
     @Override
     public void onTrimMemory(int level) {
         super.onTrimMemory(level);
@@ -3398,7 +3375,8 @@ public class Launcher extends Activity
         if (toState == State.APPS) {
             mStateTransitionAnimation.startAnimationToAllApps(mWorkspace.getState(), animated,
                     focusSearchBar);
-        } else {
+        }
+        else {
             mStateTransitionAnimation.startAnimationToWidgets(mWorkspace.getState(), animated);
         }
 
@@ -3491,7 +3469,7 @@ public class Launcher extends Activity
 
     void lockAllApps() {
         // TODO
-
+        LogT.w("lockAllApps,功能待开发");
     }
 
     void unlockAllApps() {

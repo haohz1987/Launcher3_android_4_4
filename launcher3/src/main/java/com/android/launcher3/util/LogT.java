@@ -92,9 +92,9 @@ public class LogT {
             return 0;
         }
         String msg;
-        StringBuilder builder = new StringBuilder(DOUBLE_DIVIDER);
+//        StringBuilder builder = new StringBuilder(DOUBLE_DIVIDER);
 //        StringBuilder builder = new StringBuilder(DOUBLE_DIVIDER).append('\n').append(getFunctionName());
-//        StringBuilder builder = new StringBuilder(getFunctionName()+DOUBLE_DIVIDER);
+        StringBuilder builder = new StringBuilder(getFunctionName()+DOUBLE_DIVIDER);
         if (msgObj == null) {
             msg = "";
         } else {

@@ -59,6 +59,7 @@ import com.android.launcher3.model.MigrateFromRestoreTask;
 import com.android.launcher3.model.WidgetsModel;
 import com.android.launcher3.util.ComponentKey;
 import com.android.launcher3.util.CursorIconInfo;
+import com.android.launcher3.util.LogT;
 import com.android.launcher3.util.LongArrayMap;
 import com.android.launcher3.util.ManagedProfileHeuristic;
 import com.android.launcher3.util.Thunk;
@@ -229,13 +230,13 @@ public class LauncherModel extends BroadcastReceiver
         ProviderInfo redirectProvider =
                 context.getPackageManager().resolveContentProvider(redirectAuthority, 0);
 
-        Log.d(TAG, "Old launcher provider: " + oldProvider);
+        LogT.d("Old launcher provider: " + oldProvider);
         mOldContentProviderExists = (providerInfo != null) && (redirectProvider != null);
 
         if (mOldContentProviderExists) {
-            Log.d(TAG, "Old launcher provider exists.");
+            LogT.d("Old launcher provider exists.");
         } else {
-            Log.d(TAG, "Old launcher provider does not exist.");
+            LogT.d("Old launcher provider does not exist.");
         }
 
         mApp = app;
@@ -1269,7 +1270,7 @@ public class LauncherModel extends BroadcastReceiver
      */
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (DEBUG_RECEIVER) Log.d(TAG, "onReceive intent=" + intent);
+        if (DEBUG_RECEIVER) LogT.d("onReceive intent=" + intent);
 
         final String action = intent.getAction();
         if (Intent.ACTION_LOCALE_CHANGED.equals(action)) {
@@ -1448,7 +1449,7 @@ public class LauncherModel extends BroadcastReceiver
 
             // Load the workspace
             if (DEBUG_LOADERS) {
-                Log.d(TAG, "loadAndBindWorkspace mWorkspaceLoaded=" + mWorkspaceLoaded);
+                LogT.d("loadAndBindWorkspace mWorkspaceLoaded=" + mWorkspaceLoaded);
             }
 
             if (!mWorkspaceLoaded) {
@@ -1477,7 +1478,7 @@ public class LauncherModel extends BroadcastReceiver
                             synchronized (LoaderTask.this) {
                                 mLoadAndBindStepFinished = true;
                                 if (DEBUG_LOADERS) {
-                                    Log.d(TAG, "done with previous binding step");
+                                    LogT.d("done with previous binding step");
                                 }
                                 LoaderTask.this.notify();
                             }
@@ -1494,7 +1495,7 @@ public class LauncherModel extends BroadcastReceiver
                     }
                 }
                 if (DEBUG_LOADERS) {
-                    Log.d(TAG, "waited "
+                    LogT.d("waited "
                             + (SystemClock.uptimeMillis()-workspaceWaitTime)
                             + "ms for previous step to finish binding");
                 }
@@ -1548,7 +1549,7 @@ public class LauncherModel extends BroadcastReceiver
             // All Apps interface in the foreground, load All Apps first. Otherwise, load the
             // workspace first (default).
             keep_running: {
-                if (DEBUG_LOADERS) Log.d(TAG, "step 1: loading workspace");
+                if (DEBUG_LOADERS) LogT.d("step 1: loading workspace");
                 // 加载和绑定workspace
                 loadAndBindWorkspace();
 
@@ -1559,7 +1560,7 @@ public class LauncherModel extends BroadcastReceiver
                 waitForIdle();
 
                 // second step
-                if (DEBUG_LOADERS) Log.d(TAG, "step 2: loading all apps");
+                if (DEBUG_LOADERS) LogT.d("step 2: loading all apps");
                 loadAndBindAllApps();
             }
 
@@ -1606,7 +1607,7 @@ public class LauncherModel extends BroadcastReceiver
                     return null;
                 }
                 if (callbacks == null) {
-                    Log.w(TAG, "no mCallbacks");
+                    LogT.d("no mCallbacks");
                     return null;
                 }
 
@@ -1782,7 +1783,7 @@ public class LauncherModel extends BroadcastReceiver
                 final ArrayList<Long> itemsToRemove = new ArrayList<Long>();
                 final ArrayList<Long> restoredRows = new ArrayList<Long>();
                 final Uri contentUri = LauncherSettings.Favorites.CONTENT_URI;
-                if (DEBUG_LOADERS) Log.d(TAG, "loading model from " + contentUri);
+                if (DEBUG_LOADERS) LogT.d("loading model from " + contentUri);
                 final Cursor c = contentResolver.query(contentUri, null, null, null, null);
 
                 // +1 for the hotseat (it can be larger than the workspace)
@@ -2274,7 +2275,7 @@ public class LauncherModel extends BroadcastReceiver
                             Utilities.createDbSelectionQuery(
                                     LauncherSettings.Favorites._ID, itemsToRemove), null);
                     if (DEBUG_LOADERS) {
-                        Log.d(TAG, "Removed = " + Utilities.createDbSelectionQuery(
+                        LogT.d("Removed = " + Utilities.createDbSelectionQuery(
                                 LauncherSettings.Favorites._ID, itemsToRemove));
                     }
 
@@ -2334,8 +2335,8 @@ public class LauncherModel extends BroadcastReceiver
                 }
 
                 if (DEBUG_LOADERS) {
-                    Log.d(TAG, "loaded workspace in " + (SystemClock.uptimeMillis()-t) + "ms");
-                    Log.d(TAG, "workspace layout: ");
+                    LogT.d("loaded workspace in " + (SystemClock.uptimeMillis()-t) + "ms");
+                    LogT.d("workspace layout: ");
                     int nScreens = occupied.size();
                     for (int y = 0; y < countY; y++) {
                         String line = "";
@@ -2354,7 +2355,7 @@ public class LauncherModel extends BroadcastReceiver
                                 }
                             }
                         }
-                        Log.d(TAG, "[ " + line + " ]");
+                        LogT.d("[ " + line + " ]");
                     }
                 }
             }
@@ -2576,7 +2577,7 @@ public class LauncherModel extends BroadcastReceiver
             final Callbacks oldCallbacks = mCallbacks.get();
             if (oldCallbacks == null) {
                 // This launcher has exited and nobody bothered to tell us.  Just bail.
-                Log.w(TAG, "LoaderTask running with no launcher");
+                LogT.d("LoaderTask running with no launcher");
                 return;
             }
 
@@ -2691,7 +2692,7 @@ public class LauncherModel extends BroadcastReceiver
 
                     // If we're profiling, ensure this is the last thing in the queue.
                     if (DEBUG_LOADERS) {
-                        Log.d(TAG, "bound workspace in "
+                        LogT.d("bound workspace in "
                             + (SystemClock.uptimeMillis()-t) + "ms");
                     }
 
@@ -2708,7 +2709,7 @@ public class LauncherModel extends BroadcastReceiver
 
         private void loadAndBindAllApps() {
             if (DEBUG_LOADERS) {
-                Log.d(TAG, "loadAndBindAllApps mAllAppsLoaded=" + mAllAppsLoaded);
+                LogT.d("loadAndBindAllApps mAllAppsLoaded=" + mAllAppsLoaded);
             }
             if (!mAllAppsLoaded) {
                 loadAllApps();
@@ -2754,7 +2755,7 @@ public class LauncherModel extends BroadcastReceiver
             final Callbacks oldCallbacks = mCallbacks.get();
             if (oldCallbacks == null) {
                 // This launcher has exited and nobody bothered to tell us.  Just bail.
-                Log.w(TAG, "LoaderTask running with no launcher (onlyBindAllApps)");
+                LogT.d("LoaderTask running with no launcher (onlyBindAllApps)");
                 return;
             }
 
@@ -2772,7 +2773,7 @@ public class LauncherModel extends BroadcastReceiver
                         callbacks.bindAllPackages(widgetList);
                     }
                     if (DEBUG_LOADERS) {
-                        Log.d(TAG, "bound all " + list.size() + " apps from cache in "
+                        LogT.d("bound all " + list.size() + " apps from cache in "
                                 + (SystemClock.uptimeMillis()-t) + "ms");
                     }
                 }
@@ -2791,7 +2792,7 @@ public class LauncherModel extends BroadcastReceiver
             final Callbacks oldCallbacks = mCallbacks.get();
             if (oldCallbacks == null) {
                 // This launcher has exited and nobody bothered to tell us.  Just bail.
-                Log.w(TAG, "LoaderTask running with no launcher (loadAllApps)");
+                LogT.d("LoaderTask running with no launcher (loadAllApps)");
                 return;
             }
 
@@ -2804,9 +2805,9 @@ public class LauncherModel extends BroadcastReceiver
                 final long qiaTime = DEBUG_LOADERS ? SystemClock.uptimeMillis() : 0;
                 final List<LauncherActivityInfoCompat> apps = mLauncherApps.getActivityList(null, user);
                 if (DEBUG_LOADERS) {
-                    Log.d(TAG, "getActivityList took "
+                    LogT.d("getActivityList took "
                             + (SystemClock.uptimeMillis()-qiaTime) + "ms for user " + user);
-                    Log.d(TAG, "getActivityList got " + apps.size() + " apps for user " + user);
+                    LogT.d("getActivityList got " + apps.size() + " apps for user " + user);
                 }
                 // Fail if we don't have any apps
                 // TODO: Fix this. Only fail for the current user.
@@ -2818,7 +2819,17 @@ public class LauncherModel extends BroadcastReceiver
                 for (int i = 0; i < apps.size(); i++) {
                     LauncherActivityInfoCompat app = apps.get(i);
                     // This builds the icon bitmaps.
-                    mBgAllAppsList.add(new AppInfo(mContext, app, user, mIconCache));
+//                    if("com.lenovo.ideafriend".equals(app.getApplicationInfo().packageName)||
+//                       "com.lenovo.email".equals(app.getApplicationInfo().packageName)
+//                       ){//不显示的包名
+//                        continue;
+//                    }
+                    if(app.getApplicationInfo().packageName.startsWith("com.handpay")
+                            || app.getApplicationInfo().packageName.equals("com.android.settings")
+                            || app.getApplicationInfo().packageName.equals("com.tencent.mobileqq")
+                            ){
+                        mBgAllAppsList.add(new AppInfo(mContext, app, user, mIconCache));
+//                    }
                 }
 
                 final ManagedProfileHeuristic heuristic = ManagedProfileHeuristic.get(mContext, user);
@@ -2854,13 +2865,12 @@ public class LauncherModel extends BroadcastReceiver
             // Post callback on main thread
             mHandler.post(new Runnable() {
                 public void run() {
-
                     final long bindTime = SystemClock.uptimeMillis();
                     final Callbacks callbacks = tryGetCallbacks(oldCallbacks);
                     if (callbacks != null) {
                         callbacks.bindAllApplications(added);
                         if (DEBUG_LOADERS) {
-                            Log.d(TAG, "bound " + added.size() + " apps in "
+                            LogT.d("bound " + added.size() + " apps in "
                                 + (SystemClock.uptimeMillis() - bindTime) + "ms");
                         }
                     } else {
@@ -2873,17 +2883,17 @@ public class LauncherModel extends BroadcastReceiver
 
             loadAndBindWidgetsAndShortcuts(tryGetCallbacks(oldCallbacks), true /* refresh */);
             if (DEBUG_LOADERS) {
-                Log.d(TAG, "Icons processed in "
+                LogT.d("Icons processed in "
                         + (SystemClock.uptimeMillis() - loadTime) + "ms");
             }
-        }
+        }}
 
         public void dumpState() {
             synchronized (sBgLock) {
-                Log.d(TAG, "mLoaderTask.mContext=" + mContext);
-                Log.d(TAG, "mLoaderTask.mStopped=" + mStopped);
-                Log.d(TAG, "mLoaderTask.mLoadAndBindStepFinished=" + mLoadAndBindStepFinished);
-                Log.d(TAG, "mItems size=" + sBgWorkspaceItems.size());
+                LogT.d("mLoaderTask.mContext=" + mContext);
+                LogT.d("mLoaderTask.mStopped=" + mStopped);
+                LogT.d("mLoaderTask.mLoadAndBindStepFinished=" + mLoadAndBindStepFinished);
+                LogT.d("mItems size=" + sBgWorkspaceItems.size());
             }
         }
     }
@@ -3018,7 +3028,7 @@ public class LauncherModel extends BroadcastReceiver
             switch (mOp) {
                 case OP_ADD: {
                     for (int i=0; i<N; i++) {
-                        if (DEBUG_LOADERS) Log.d(TAG, "mAllAppsList.addPackage " + packages[i]);
+                        if (DEBUG_LOADERS) LogT.d("mAllAppsList.addPackage " + packages[i]);
                         mIconCache.updateIconsForPkg(packages[i], mUser);
                         mBgAllAppsList.addPackage(context, packages[i], mUser);
                     }
@@ -3031,7 +3041,7 @@ public class LauncherModel extends BroadcastReceiver
                 }
                 case OP_UPDATE:
                     for (int i=0; i<N; i++) {
-                        if (DEBUG_LOADERS) Log.d(TAG, "mAllAppsList.updatePackage " + packages[i]);
+                        if (DEBUG_LOADERS) LogT.d("mAllAppsList.updatePackage " + packages[i]);
                         mIconCache.updateIconsForPkg(packages[i], mUser);
                         mBgAllAppsList.updatePackage(context, packages[i], mUser);
                         mApp.getWidgetCache().removePackage(packages[i], mUser);
@@ -3043,14 +3053,14 @@ public class LauncherModel extends BroadcastReceiver
                         heuristic.processPackageRemoved(mPackages);
                     }
                     for (int i=0; i<N; i++) {
-                        if (DEBUG_LOADERS) Log.d(TAG, "mAllAppsList.removePackage " + packages[i]);
+                        if (DEBUG_LOADERS) LogT.d("mAllAppsList.removePackage " + packages[i]);
                         mIconCache.removeIconsForPkg(packages[i], mUser);
                     }
                     // Fall through
                 }
                 case OP_UNAVAILABLE:
                     for (int i=0; i<N; i++) {
-                        if (DEBUG_LOADERS) Log.d(TAG, "mAllAppsList.removePackage " + packages[i]);
+                        if (DEBUG_LOADERS) LogT.d("mAllAppsList.removePackage " + packages[i]);
                         mBgAllAppsList.removePackage(packages[i], mUser);
                         mApp.getWidgetCache().removePackage(packages[i], mUser);
                     }
@@ -3076,7 +3086,7 @@ public class LauncherModel extends BroadcastReceiver
 
             final Callbacks callbacks = getCallback();
             if (callbacks == null) {
-                Log.w(TAG, "Nobody to tell about the new app.  Launcher is probably loading.");
+                LogT.d("Nobody to tell about the new app.  Launcher is probably loading.");
                 return;
             }
 
@@ -3520,13 +3530,13 @@ public class LauncherModel extends BroadcastReceiver
             UserHandleCompat user, Context context, Cursor c, int iconIndex, int titleIndex,
             boolean allowMissingTarget, boolean useLowResIcon) {
         if (user == null) {
-            Log.d(TAG, "Null user found in getShortcutInfo");
+            LogT.d("Null user found in getShortcutInfo");
             return null;
         }
 
         ComponentName componentName = intent.getComponent();
         if (componentName == null) {
-            Log.d(TAG, "Missing component found in getShortcutInfo: " + componentName);
+            LogT.d("Missing component found in getShortcutInfo: " + componentName);
             return null;
         }
 
@@ -3535,7 +3545,7 @@ public class LauncherModel extends BroadcastReceiver
         newIntent.setComponent(componentName);
         LauncherActivityInfoCompat lai = mLauncherApps.resolveActivity(newIntent, user);
         if ((lai == null) && !allowMissingTarget) {
-            Log.d(TAG, "Missing activity found in getShortcutInfo: " + componentName);
+            LogT.d("Missing activity found in getShortcutInfo: " + componentName);
             return null;
         }
 
@@ -3702,7 +3712,7 @@ public class LauncherModel extends BroadcastReceiver
     }
 
     public void dumpState() {
-        Log.d(TAG, "mCallbacks=" + mCallbacks);
+        LogT.d("mCallbacks=" + mCallbacks);
         AppInfo.dumpApplicationInfoList(TAG, "mAllAppsList.data", mBgAllAppsList.data);
         AppInfo.dumpApplicationInfoList(TAG, "mAllAppsList.added", mBgAllAppsList.added);
         AppInfo.dumpApplicationInfoList(TAG, "mAllAppsList.removed", mBgAllAppsList.removed);
@@ -3710,7 +3720,7 @@ public class LauncherModel extends BroadcastReceiver
         if (mLoaderTask != null) {
             mLoaderTask.dumpState();
         } else {
-            Log.d(TAG, "mLoaderTask=null");
+            LogT.d("mLoaderTask=null");
         }
     }
 
