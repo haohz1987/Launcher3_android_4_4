@@ -32,4 +32,6 @@ public class LauncherApplication extends Application{
     public void onLowMemory() {
         super.onLowMemory();
     }
+
+
 }

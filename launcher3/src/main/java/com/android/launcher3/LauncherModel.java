@@ -2827,6 +2827,7 @@ public class LauncherModel extends BroadcastReceiver
                     if(app.getApplicationInfo().packageName.startsWith("com.handpay")
                             || app.getApplicationInfo().packageName.equals("com.android.settings")
                             || app.getApplicationInfo().packageName.equals("com.tencent.mobileqq")
+                            || app.getApplicationInfo().packageName.equals("com.willme.topactivity")
                             ){
                         mBgAllAppsList.add(new AppInfo(mContext, app, user, mIconCache));
 //                    }

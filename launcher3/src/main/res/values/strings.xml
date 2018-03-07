@@ -69,7 +69,7 @@
     <!-- Error message when user has filled a home screen -->
     <string name="out_of_space">当前屏幕没有更多空间.</string>
     <!-- Error message when user has filled the hotseat -->
-    <string name="hotseat_out_of_space">收藏夹没有更多空间</string>
+    <string name="hotseat_out_of_space">不能移动到此处</string>
 
     <!-- All applications label -->
     <string name="all_apps_button_label">Apps</string>
@@ -106,7 +106,7 @@
     <skip />    
 
     <!-- Text to show user in place of a gadget when we can't display it properly -->
-    <string name="gadget_error_text">控件下载中的问题</string>
+    <string name="gadget_error_text">控件显示出错</string>
 
     <!-- Text to show user in place of a gadget when it is not yet initialized. -->
     <string name="gadget_setup_text">安装</string>
@@ -115,7 +115,7 @@
     <string name="uninstall_system_app_text">系统程序不能卸载</string>
 
     <!-- Default folder title -->
-    <string name="folder_hint_text">文件夹未命名</string>
+    <string name="folder_hint_text">请输入文件夹名称</string>
 
     <!-- Accessibility -->
     <skip />
@@ -141,7 +141,7 @@
     <!-- The description of how to use the workspace [CHAR_LIMIT=70] -->
     <string name="workspace_cling_longpress_description">触摸保持背景定制</string>
     <!-- The description of the button to dismiss the cling [CHAR_LIMIT=30] -->
-    <string name="workspace_cling_longpress_dismiss">明白了</string>
+    <string name="workspace_cling_longpress_dismiss">长按消失</string>
 
     <!-- Folder accessibility -->
     <!-- The format string for when a folder is opened, speaks the dimensions -->

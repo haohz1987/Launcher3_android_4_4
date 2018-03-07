@@ -86,7 +86,7 @@ public class LauncherAppState {
         if (sContext.getResources().getBoolean(R.bool.debug_memory_enabled)) {
             MemoryTracker.startTrackingMe(sContext, "L");
         }
-
+        /* 对页面布局，icon大小，hotseat 大小一些参数的自适 */
         mInvariantDeviceProfile = new InvariantDeviceProfile(sContext);
         /* 应用图标缓存对象 */
         mIconCache = new IconCache(sContext, mInvariantDeviceProfile);

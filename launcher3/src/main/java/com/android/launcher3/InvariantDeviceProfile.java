@@ -24,6 +24,7 @@ import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
 
+import com.android.launcher3.util.LogT;
 import com.android.launcher3.util.Thunk;
 
 import java.util.ArrayList;
@@ -96,7 +97,8 @@ public class InvariantDeviceProfile {
                 p.iconSize, p.iconTextSize, p.numHotseatIcons, p.hotseatIconSize,
                 p.defaultLayoutId);
     }
-
+    // predefinedDeviceProfiles.add(new InvariantDeviceProfile("Super Short Stubby",
+    //    255, 300, 2, 3, 2, 3, 3, 48, 13, 3, 48, R.xml.default_workspace_4x4));
     InvariantDeviceProfile(String n, float w, float h, int r, int c, int fr, int fc, int maapc,
             float is, float its, float hs, float his, int dlId) {
         // Ensure that we have an odd number of hotseat items (since we need to place all apps)
@@ -107,15 +109,15 @@ public class InvariantDeviceProfile {
         name = n;
         minWidthDps = w;
         minHeightDps = h;
-        numRows = r;
-        numColumns = c;
-        numFolderRows = fr;
-        numFolderColumns = fc;
+        numRows = 3;
+        numColumns = 2;
+        numFolderRows = 2;
+        numFolderColumns = 3;
         minAllAppsPredictionColumns = maapc;
-        iconSize = is;
-        iconTextSize = its;
-        numHotseatIcons = hs;
-        hotseatIconSize = his;
+        iconSize = 80;
+        iconTextSize = 15;
+        numHotseatIcons = 1;
+        hotseatIconSize = 80;
         defaultLayoutId = dlId;
     }
 
@@ -201,6 +203,7 @@ public class InvariantDeviceProfile {
                 727, 1207,    5, 6, 4, 5, 4, 76, 14.4f,  7, 64, R.xml.default_workspace_5x6));
         predefinedDeviceProfiles.add(new InvariantDeviceProfile("20-inch Tablet",
                 1527, 2527,   7, 7, 6, 6, 4, 100, 20,  7, 72, R.xml.default_workspace_4x4));
+        LogT.w("自适应参数："+predefinedDeviceProfiles.toString());
         return predefinedDeviceProfiles;
     }
 

@@ -50,4 +50,13 @@
     <color name="widgets_view_section_text_color">#FFFFFF</color>
     <color name="widgets_view_item_text_color">#C4C4C4</color>
     <color name="widgets_cell_color">#263238</color>
+
+    <color name="color01_1">#f79c2d</color>
+    <color name="color01_2">#90adf0</color>
+    <color name="color01_3">#91d400</color>
+    <color name="color01_4">#f4c728</color>
+    <color name="color01_5">#f5a2bb</color>
+    <color name="color01_6">#2abd95</color>
+
+
 </resources>

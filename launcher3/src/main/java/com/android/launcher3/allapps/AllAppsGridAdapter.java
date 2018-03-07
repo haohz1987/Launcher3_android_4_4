@@ -18,16 +18,14 @@ package com.android.launcher3.allapps;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
-import android.support.v4.view.accessibility.AccessibilityRecordCompat;
-import android.support.v4.view.accessibility.AccessibilityEventCompat;
 import android.net.Uri;
+import android.support.v4.view.accessibility.AccessibilityEventCompat;
+import android.support.v4.view.accessibility.AccessibilityRecordCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -37,6 +35,7 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.TextView;
+
 import com.android.launcher3.AppInfo;
 import com.android.launcher3.BubbleTextView;
 import com.android.launcher3.Launcher;
@@ -337,7 +336,7 @@ public class AllAppsGridAdapter extends RecyclerView.Adapter<AllAppsGridAdapter.
     private String mEmptySearchMessage;
     // The name of the market app which handles searches, to be used in the format str
     // below when updating the search-market view.  Only needs to be loaded once.
-    private String mMarketAppName;
+//    private String mMarketAppName;
     // The text to show when there is a market app which can handle a specific query, updated
     // each time the search query changes.
     private String mMarketSearchMessage;
@@ -386,11 +385,11 @@ public class AllAppsGridAdapter extends RecyclerView.Adapter<AllAppsGridAdapter.
 
         // Resolve the market app handling additional searches
         PackageManager pm = launcher.getPackageManager();
-        ResolveInfo marketInfo = pm.resolveActivity(createMarketSearchIntent(""),
-                PackageManager.MATCH_DEFAULT_ONLY);
-        if (marketInfo != null) {
-            mMarketAppName = marketInfo.loadLabel(pm).toString();
-        }
+//        ResolveInfo marketInfo = pm.resolveActivity(createMarketSearchIntent(""),
+//                PackageManager.MATCH_DEFAULT_ONLY);
+//        if (marketInfo != null) {
+//            mMarketAppName = marketInfo.loadLabel(pm).toString();
+//        }
     }
 
     /**
@@ -417,11 +416,11 @@ public class AllAppsGridAdapter extends RecyclerView.Adapter<AllAppsGridAdapter.
         String formatStr = res.getString(R.string.all_apps_no_search_results);
         mLastSearchQuery = query;
         mEmptySearchMessage = String.format(formatStr, query);
-        if (mMarketAppName != null) {
-            mMarketSearchMessage = String.format(res.getString(R.string.all_apps_search_market_message),
-                    mMarketAppName);
-            mMarketSearchIntent = createMarketSearchIntent(query);
-        }
+//        if (mMarketAppName != null) {
+//            mMarketSearchMessage = String.format(res.getString(R.string.all_apps_search_market_message),
+//                    mMarketAppName);
+//            mMarketSearchIntent = createMarketSearchIntent(query);
+//        }
     }
 
     /**

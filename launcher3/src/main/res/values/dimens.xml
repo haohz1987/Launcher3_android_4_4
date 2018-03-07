@@ -15,7 +15,7 @@
 -->
 
 <resources>
-    <dimen name="app_icon_size">64dp</dimen>
+    <dimen name="app_icon_size">128dp</dimen>
 
 <!-- Dynamic Grid -->
     <dimen name="dynamic_grid_edge_margin">6dp</dimen>
@@ -43,7 +43,7 @@
     <dimen name="cling_migration_content_width">280dp</dimen>
 
 <!-- Workspace -->
-    <dimen name="workspace_max_gap">16dp</dimen>
+    <dimen name="workspace_max_gap">46dp</dimen>
 
 <!-- QSB -->
     <dimen name="toolbar_button_vertical_padding">4dip</dimen>

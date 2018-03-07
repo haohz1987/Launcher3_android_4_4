@@ -66,6 +66,9 @@ import java.util.regex.Pattern;
 
 /**
  * Various utilities shared amongst the Launcher's classes.
+ *
+ *  Launcher图标的获取处理
+ *
  */
 public final class Utilities {
 
@@ -290,7 +293,7 @@ public final class Utilities {
     }
 
     /**
-     * Inverse of {@link #getDescendantCoordRelativeToSelf(View, int[])}.
+     * Inverse of {link #getDescendantCoordRelativeToSelf(View, int[])}.
      */
     public static float mapCoordInSelfToDescendent(View descendant, View root,
                                                    int[] coord) {
