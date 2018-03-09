@@ -24,7 +24,6 @@ import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
 
-import com.android.launcher3.util.LogT;
 import com.android.launcher3.util.Thunk;
 
 import java.util.ArrayList;
@@ -203,7 +202,7 @@ public class InvariantDeviceProfile {
                 727, 1207,    5, 6, 4, 5, 4, 76, 14.4f,  7, 64, R.xml.default_workspace_5x6));
         predefinedDeviceProfiles.add(new InvariantDeviceProfile("20-inch Tablet",
                 1527, 2527,   7, 7, 6, 6, 4, 100, 20,  7, 72, R.xml.default_workspace_4x4));
-        LogT.w("自适应参数："+predefinedDeviceProfiles.toString());
+//        LogT.w("自适应参数："+predefinedDeviceProfiles.toString());
         return predefinedDeviceProfiles;
     }
 

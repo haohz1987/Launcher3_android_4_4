@@ -32,6 +32,18 @@
             android:layout_weight="1" >
 
             <!-- Delete target -->
+            <TextView
+                android:id="@+id/tv_title"
+                style="@style/Icon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="4dip"
+                android:textSize="20sp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:background="@color/color_6"
+                android:text="瀚银商户助手"/>
+
 
             <com.android.launcher3.DeleteDropTarget
                 android:id="@+id/delete_target_text"

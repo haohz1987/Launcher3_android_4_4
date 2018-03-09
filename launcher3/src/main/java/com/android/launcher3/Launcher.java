@@ -1039,6 +1039,7 @@ public class Launcher extends Activity
         mOnResumeState = State.NONE;
         /* 墙纸修改为始终为灰黑色 */
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.DKGRAY));
+//        getWindow().setBackgroundDrawableResource(R.drawable.);
 
         mPaused = false;
         if (mRestoring || mOnResumeNeedsLoad) {
@@ -2891,6 +2892,7 @@ public class Launcher extends Activity
     }
 
     private boolean startActivity(View v, Intent intent, Object tag) {
+        if(intent ==null ) return false;
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         try {
             // Only launch using the new animation if the shortcut has not opted out (this is a

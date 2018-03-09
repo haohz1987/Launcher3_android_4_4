@@ -59,7 +59,7 @@
     <string name="all_apps_search_bar_hint">搜索apps</string>
     <string name="all_apps_loading_message">正在下载 Apps&#8230;</string>
     <!-- No-search-results text. [CHAR_LIMIT=50] -->
-    <string name="all_apps_no_search_results">没有匹配的Apps \"<xliff:g id="query" example="Android">%1$s</xliff:g>\"</string>
+    <string name="all_apps_no_search_results">没有匹配的程序名 \"<xliff:g id="query" example="Android">%1$s</xliff:g>\"</string>
     <!-- Search market text.  This is a format string where the first argument is the name of the activity
          handling the search.  The format string does not need to handle both of these arguments. [CHAR_LIMIT=50] -->
     <string name="all_apps_search_market_message">转到 <xliff:g id="query" example="Play Store">%1$s</xliff:g></string>

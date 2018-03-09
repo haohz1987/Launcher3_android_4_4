@@ -13,13 +13,15 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+<!--android:background="@android:color/transparent"
 
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"-->
 <com.android.launcher3.CellLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:launcher="http://schemas.android.com/apk/res-auto"
-
+    android:background="@color/color_6"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:hapticFeedbackEnabled="false"
-
     launcher:maxGap="@dimen/workspace_max_gap" />

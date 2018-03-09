@@ -56,7 +56,8 @@ class AlphaUpdateListener extends AnimatorListenerAdapter implements ValueAnimat
         // accessibility is on, in which case not setting them to GONE causes a glitch.
         int invisibleState = accessibilityEnabled ? View.GONE : View.INVISIBLE;
         if (view.getAlpha() < ALPHA_CUTOFF_THRESHOLD && view.getVisibility() != invisibleState) {
-            view.setVisibility(invisibleState);
+//            view.setVisibility(invisibleState);
+            view.setVisibility(View.VISIBLE);
         } else if (view.getAlpha() > ALPHA_CUTOFF_THRESHOLD
                 && view.getVisibility() != View.VISIBLE) {
             view.setVisibility(View.VISIBLE);

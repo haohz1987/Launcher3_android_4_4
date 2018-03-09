@@ -1,5 +1,6 @@
 Launcher3
 =========
+这是作者原版，修改及详细注释版，请切换分支 modify
 
 更改官方的Launcher3使得可以在Android Studio编译
 

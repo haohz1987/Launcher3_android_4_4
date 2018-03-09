@@ -25,7 +25,9 @@ import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
+import com.android.launcher3.util.LogT;
 import com.android.launcher3.util.Thunk;
 
 /*
@@ -33,6 +35,8 @@ import com.android.launcher3.util.Thunk;
  * targets so that each of the individual IconDropTargets don't have to.
  */
 public class SearchDropTargetBar extends FrameLayout implements DragController.DragListener {
+
+    private TextView mTitle;
 
     /** The different states that the search bar space can be in. */
     public enum State {
@@ -108,6 +112,7 @@ public class SearchDropTargetBar extends FrameLayout implements DragController.D
         mDropTargetBar = findViewById(R.id.drag_target_bar);
 //        mInfoDropTarget = (ButtonDropTarget) mDropTargetBar.findViewById(R.id.info_target_text);
         mDeleteDropTarget = (ButtonDropTarget) mDropTargetBar.findViewById(R.id.delete_target_text);
+        mTitle = mDropTargetBar.findViewById(R.id.tv_title);
 
 //        mUninstallDropTarget = (ButtonDropTarget) mDropTargetBar.findViewById(R.id.uninstall_target_text);
 
@@ -116,20 +121,29 @@ public class SearchDropTargetBar extends FrameLayout implements DragController.D
 //        mUninstallDropTarget.setSearchDropTargetBar(this);
 
         // Create the various fade animations
-        mDropTargetBar.setAlpha(0f);
+//        mDropTargetBar.setAlpha(0f);
+        mTitle.setVisibility(VISIBLE);
+        LogT.w("标题栏显示,删除隐藏");
+        mDeleteDropTarget.setVisibility(GONE);
         mDropTargetBarAnimator = new LauncherViewPropertyAnimator(mDropTargetBar);
         mDropTargetBarAnimator.setInterpolator(sAccelerateInterpolator);
         mDropTargetBarAnimator.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationStart(Animator animation) {
+                LogT.w("DropTarget动画开始");
                 // Ensure that the view is visible for the animation
                 mDropTargetBar.setVisibility(View.VISIBLE);
+
             }
 
             @Override
             public void onAnimationEnd(Animator animation) {
                 if (mDropTargetBar != null) {
+                    LogT.w("DropTarget动画结束");
                     AlphaUpdateListener.updateVisibility(mDropTargetBar, mAccessibilityEnabled);
+                    mDropTargetBar.setAlpha(1);
+                    mDeleteDropTarget.setVisibility(GONE);
+                    mTitle.setVisibility(VISIBLE);
                 }
             }
         });
@@ -144,6 +158,7 @@ public class SearchDropTargetBar extends FrameLayout implements DragController.D
             mQSBSearchBarAnimator.addListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationStart(Animator animation) {
+                    LogT.w("mQSB动画开始");
                     // Ensure that the view is visible for the animation
                     if (mQSB != null) {
                         mQSB.setVisibility(View.VISIBLE);
@@ -152,6 +167,7 @@ public class SearchDropTargetBar extends FrameLayout implements DragController.D
 
                 @Override
                 public void onAnimationEnd(Animator animation) {
+                    LogT.w("mQSB动画结束");
                     if (mQSB != null) {
                         AlphaUpdateListener.updateVisibility(mQSB, mAccessibilityEnabled);
                     }
@@ -169,7 +185,7 @@ public class SearchDropTargetBar extends FrameLayout implements DragController.D
     public void animateToState(State newState, int duration) {
         if (mState != newState) {
             mState = newState;
-
+            LogT.w("animateToState");
             // Update the accessibility state
             AccessibilityManager am = (AccessibilityManager)
                     getContext().getSystemService(Context.ACCESSIBILITY_SERVICE);
@@ -179,6 +195,7 @@ public class SearchDropTargetBar extends FrameLayout implements DragController.D
                     duration);
             animateViewAlpha(mDropTargetBarAnimator, mDropTargetBar, newState.getDropTargetBarAlpha(),
                     duration);
+
         }
     }
 
@@ -194,8 +211,12 @@ public class SearchDropTargetBar extends FrameLayout implements DragController.D
         animator.cancel();
         if (Float.compare(v.getAlpha(), alpha) != 0) {
             if (duration > 0) {
+                LogT.w("有延时");
                 animator.alpha(alpha).withLayer().setDuration(duration).start();
             } else {
+                mTitle.setVisibility(VISIBLE);
+                LogT.w("标题栏显示");
+
                 v.setAlpha(alpha);
                 AlphaUpdateListener.updateVisibility(v, mAccessibilityEnabled);
             }
@@ -207,7 +228,10 @@ public class SearchDropTargetBar extends FrameLayout implements DragController.D
      */
     @Override
     public void onDragStart(DragSource source, Object info, int dragAction) {
+        LogT.w("onDragStart");
         animateToState(State.DROP_TARGET, DEFAULT_DRAG_FADE_DURATION);
+        mDeleteDropTarget.setVisibility(VISIBLE);
+        mTitle.setVisibility(GONE);
     }
 
     /**
@@ -215,11 +239,17 @@ public class SearchDropTargetBar extends FrameLayout implements DragController.D
      * instead of hiding immediately when the drag has ended.
      */
     public void deferOnDragEnd() {
+        LogT.w("mDeferOnDragEnd="+mDeferOnDragEnd);
         mDeferOnDragEnd = true;
+
     }
 
     @Override
     public void onDragEnd() {
+        LogT.w("onDragEnd");
+        mDropTargetBar.setAlpha(1);
+        mDeleteDropTarget.setVisibility(GONE);
+        mTitle.setVisibility(VISIBLE);
         if (!mDeferOnDragEnd) {
             animateToState(State.SEARCH_BAR, DEFAULT_DRAG_FADE_DURATION);
         } else {
@@ -247,6 +277,7 @@ public class SearchDropTargetBar extends FrameLayout implements DragController.D
     }
 
     public void enableAccessibleDrag(boolean enable) {
+        LogT.w("enableAccessibleDrag="+enable);
         if (mQSB != null) {
             mQSB.setVisibility(enable ? View.GONE : View.VISIBLE);
         }

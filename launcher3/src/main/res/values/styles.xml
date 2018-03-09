@@ -17,13 +17,13 @@
 */
 -->
 
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <style name="Theme.Light.CustomOverscroll" parent="@android:style/Theme.DeviceDefault">
-        <item name="android:colorEdgeEffect">@color/folder_edge_effect_color</item>
+        <item name="android:colorEdgeEffect" tools:ignore="NewApi">@color/folder_edge_effect_color</item>
     </style>
 
     <style name="Theme.Dark.CustomOverscroll" parent="@android:style/Theme.DeviceDefault">
-        <item name="android:colorEdgeEffect">@color/workspace_edge_effect_color</item>
+        <item name="android:colorEdgeEffect" tools:ignore="NewApi">@color/workspace_edge_effect_color</item>
     </style>
 
     <style name="Icon">
@@ -57,7 +57,7 @@
     <style name="SearchButton"></style>
 
     <style name="DropTargetButtonContainer">
-        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
     </style>
 

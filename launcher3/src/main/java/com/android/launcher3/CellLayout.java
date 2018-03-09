@@ -689,9 +689,9 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler {
 
     /**
      * Given a point, return the cell that strictly encloses that point
-     * @param x X coordinate of the point
-     * @param y Y coordinate of the point
-     * @param result Array of 2 ints to hold the x and y coordinate of the cell
+     * param x X coordinate of the point
+     * param y Y coordinate of the point
+     * param result Array of 2 ints to hold the x and y coordinate of the cell
      */
     public void pointToCellExact(int x, int y, int[] result) {
         final int hStartPadding = getPaddingLeft();
@@ -711,9 +711,9 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler {
 
     /**
      * Given a point, return the cell that most closely encloses that point
-     * @param x X coordinate of the point
-     * @param y Y coordinate of the point
-     * @param result Array of 2 ints to hold the x and y coordinate of the cell
+     * param x X coordinate of the point
+     * param y Y coordinate of the point
+     * param result Array of 2 ints to hold the x and y coordinate of the cell
      */
     void pointToCellRounded(int x, int y, int[] result) {
         pointToCellExact(x + (mCellWidth / 2), y + (mCellHeight / 2), result);
@@ -722,10 +722,10 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler {
     /**
      * Given a cell coordinate, return the point that represents the upper left corner of that cell
      *
-     * @param cellX X coordinate of the cell
-     * @param cellY Y coordinate of the cell
+     * param cellX X coordinate of the cell
+     * param cellY Y coordinate of the cell
      *
-     * @param result Array of 2 ints to hold the x and y coordinate of the point
+     * param result Array of 2 ints to hold the x and y coordinate of the point
      */
     void cellToPoint(int cellX, int cellY, int[] result) {
         final int hStartPadding = getPaddingLeft();
@@ -738,10 +738,10 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler {
     /**
      * Given a cell coordinate, return the point that represents the center of the cell
      *
-     * @param cellX X coordinate of the cell
-     * @param cellY Y coordinate of the cell
+     * param cellX X coordinate of the cell
+     * param cellY Y coordinate of the cell
      *
-     * @param result Array of 2 ints to hold the x and y coordinate of the point
+     * param result Array of 2 ints to hold the x and y coordinate of the point
      */
     void cellToCenterPoint(int cellX, int cellY, int[] result) {
         regionToCenterPoint(cellX, cellY, 1, 1, result);
@@ -750,10 +750,10 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler {
     /**
      * Given a cell coordinate and span return the point that represents the center of the regio
      *
-     * @param cellX X coordinate of the cell
-     * @param cellY Y coordinate of the cell
+     * param cellX X coordinate of the cell
+     * param cellY Y coordinate of the cell
      *
-     * @param result Array of 2 ints to hold the x and y coordinate of the point
+     * param result Array of 2 ints to hold the x and y coordinate of the point
      */
     void regionToCenterPoint(int cellX, int cellY, int spanX, int spanY, int[] result) {
         final int hStartPadding = getPaddingLeft();
@@ -767,9 +767,9 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler {
      /**
      * Given a cell coordinate and span fills out a corresponding pixel rect
      *
-     * @param cellX X coordinate of the cell
-     * @param cellY Y coordinate of the cell
-     * @param result Rect in which to write the result
+     * param cellX X coordinate of the cell
+     * param cellY Y coordinate of the cell
+     * param result Rect in which to write the result
      */
      void regionToRect(int cellX, int cellY, int spanX, int spanY, Rect result) {
         final int hStartPadding = getPaddingLeft();
@@ -1092,11 +1092,11 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler {
      * Find a vacant area that will fit the given bounds nearest the requested
      * cell location. Uses Euclidean distance to score multiple vacant areas.
      *
-     * @param pixelX The X location at which you want to search for a vacant area.
-     * @param pixelY The Y location at which you want to search for a vacant area.
-     * @param spanX Horizontal span of the object.
-     * @param spanY Vertical span of the object.
-     * @param result Array in which to place the result, or null (in which case a new array will
+     * param pixelX The X location at which you want to search for a vacant area.
+     * param pixelY The Y location at which you want to search for a vacant area.
+     * param spanX Horizontal span of the object.
+     * param spanY Vertical span of the object.
+     * param result Array in which to place the result, or null (in which case a new array will
      *        be allocated)
      * @return The X, Y cell of a vacant area that can contain this object,
      *         nearest the requested location.
@@ -1109,13 +1109,13 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler {
      * Find a vacant area that will fit the given bounds nearest the requested
      * cell location. Uses Euclidean distance to score multiple vacant areas.
      *
-     * @param pixelX The X location at which you want to search for a vacant area.
-     * @param pixelY The Y location at which you want to search for a vacant area.
-     * @param minSpanX The minimum horizontal span required
-     * @param minSpanY The minimum vertical span required
-     * @param spanX Horizontal span of the object.
-     * @param spanY Vertical span of the object.
-     * @param result Array in which to place the result, or null (in which case a new array will
+     * param pixelX The X location at which you want to search for a vacant area.
+     * param pixelY The Y location at which you want to search for a vacant area.
+     * param minSpanX The minimum horizontal span required
+     * param minSpanY The minimum vertical span required
+     * param spanX Horizontal span of the object.
+     * param spanY Vertical span of the object.
+     * param result Array in which to place the result, or null (in which case a new array will
      *        be allocated)
      * @return The X, Y cell of a vacant area that can contain this object,
      *         nearest the requested location.
@@ -1145,14 +1145,14 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler {
      * Find a vacant area that will fit the given bounds nearest the requested
      * cell location. Uses Euclidean distance to score multiple vacant areas.
      *
-     * @param pixelX The X location at which you want to search for a vacant area.
-     * @param pixelY The Y location at which you want to search for a vacant area.
-     * @param minSpanX The minimum horizontal span required
-     * @param minSpanY The minimum vertical span required
-     * @param spanX Horizontal span of the object.
-     * @param spanY Vertical span of the object.
-     * @param ignoreOccupied If true, the result can be an occupied cell
-     * @param result Array in which to place the result, or null (in which case a new array will
+     * param pixelX The X location at which you want to search for a vacant area.
+     * param pixelY The Y location at which you want to search for a vacant area.
+     * param minSpanX The minimum horizontal span required
+     * param minSpanY The minimum vertical span required
+     * param spanX Horizontal span of the object.
+     * param spanY Vertical span of the object.
+     * param ignoreOccupied If true, the result can be an occupied cell
+     * param result Array in which to place the result, or null (in which case a new array will
      *        be allocated)
      * @return The X, Y cell of a vacant area that can contain this object,
      *         nearest the requested location.
@@ -1281,17 +1281,17 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler {
      * desired location. This method computers distance based on unit grid distances,
      * not pixel distances.
      *
-     * @param cellX The X cell nearest to which you want to search for a vacant area.
-     * @param cellY The Y cell nearest which you want to search for a vacant area.
-     * @param spanX Horizontal span of the object.
-     * @param spanY Vertical span of the object.
-     * @param direction The favored direction in which the views should move from x, y
-     * @param exactDirectionOnly If this parameter is true, then only solutions where the direction
+     * param cellX The X cell nearest to which you want to search for a vacant area.
+     * param cellY The Y cell nearest which you want to search for a vacant area.
+     * param spanX Horizontal span of the object.
+     * param spanY Vertical span of the object.
+     * param direction The favored direction in which the views should move from x, y
+     * param exactDirectionOnly If this parameter is true, then only solutions where the direction
      *        matches exactly. Otherwise we find the best matching direction.
-     * @param occoupied The array which represents which cells in the CellLayout are occupied
-     * @param blockOccupied The array which represents which cells in the specified block (cellX,
+     * param occoupied The array which represents which cells in the CellLayout are occupied
+     * param blockOccupied The array which represents which cells in the specified block (cellX,
      *        cellY, spanX, spanY) are occupied. This is used when try to move a group of views.
-     * @param result Array in which to place the result, or null (in which case a new array will
+     * param result Array in which to place the result, or null (in which case a new array will
      *        be allocated)
      * @return The X, Y cell of a vacant area that can contain this object,
      *         nearest the requested location.
@@ -2555,12 +2555,12 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler {
      * Find a starting cell position that will fit the given bounds nearest the requested
      * cell location. Uses Euclidean distance to score multiple vacant areas.
      *
-     * @param pixelX The X location at which you want to search for a vacant area.
-     * @param pixelY The Y location at which you want to search for a vacant area.
-     * @param spanX Horizontal span of the object.
-     * @param spanY Vertical span of the object.
-     * @param ignoreView Considers space occupied by this view as unoccupied
-     * @param result Previously returned value to possibly recycle.
+     * param pixelX The X location at which you want to search for a vacant area.
+     * param pixelY The Y location at which you want to search for a vacant area.
+     * param spanX Horizontal span of the object.
+     * param spanY Vertical span of the object.
+     * param ignoreView Considers space occupied by this view as unoccupied
+     * param result Previously returned value to possibly recycle.
      * @return The X, Y cell of a vacant area that can contain this object,
      *         nearest the requested location.
      */
@@ -2578,10 +2578,10 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler {
      * then this method will only return coordinates for rectangles that contain the cell
      * (intersectX, intersectY)
      *
-     * @param cellXY The array that will contain the position of a vacant cell if such a cell
+     * param cellXY The array that will contain the position of a vacant cell if such a cell
      *               can be found.
-     * @param spanX The horizontal span of the cell we want to find.
-     * @param spanY The vertical span of the cell we want to find.
+     * param spanX The horizontal span of the cell we want to find.
+     * param spanY The vertical span of the cell we want to find.
      *
      * @return True if a vacant cell of the specified dimension was found, false otherwise.
      */
@@ -2648,7 +2648,7 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler {
      * At the beginning of the drag operation, the child may have been on another
      * screen, but it is re-parented before this method is called.
      *
-     * @param child The child that is being dropped
+     * param child The child that is being dropped
      */
     void onDropChild(View child) {
         if (child != null) {
@@ -2661,11 +2661,11 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler {
     /**
      * Computes a bounding rectangle for a range of cells
      *
-     * @param cellX X coordinate of upper left corner expressed as a cell position
-     * @param cellY Y coordinate of upper left corner expressed as a cell position
-     * @param cellHSpan Width in cells
-     * @param cellVSpan Height in cells
-     * @param resultRect Rect into which to put the results
+     * param cellX X coordinate of upper left corner expressed as a cell position
+     * param cellY Y coordinate of upper left corner expressed as a cell position
+     * param cellHSpan Width in cells
+     * param cellVSpan Height in cells
+     * param resultRect Rect into which to put the results
      */
     public void cellToRect(int cellX, int cellY, int cellHSpan, int cellVSpan, Rect resultRect) {
         final int cellWidth = mCellWidth;
