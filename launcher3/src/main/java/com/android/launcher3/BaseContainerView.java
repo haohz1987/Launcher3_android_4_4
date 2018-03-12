@@ -19,8 +19,9 @@ package com.android.launcher3;
 import android.content.Context;
 import android.graphics.Rect;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.widget.LinearLayout;
+
+import com.android.launcher3.util.LogT;
 
 /**
  * A base container view, which supports resizing.
@@ -72,7 +73,7 @@ public abstract class BaseContainerView extends LinearLayout implements Insettab
      */
     final public void setSearchBarBounds(Rect bounds) {
         if (LauncherAppState.isDogfoodBuild() && !isValidSearchBarBounds(bounds)) {
-            Log.e(TAG, "Invalid search bar bounds: " + bounds);
+            LogT.e("Invalid search bar bounds: " + bounds);
         }
 
         mFixedSearchBarBounds.set(bounds);

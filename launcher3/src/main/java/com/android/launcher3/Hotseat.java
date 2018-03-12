@@ -17,8 +17,6 @@
 package com.android.launcher3;
 
 import android.content.Context;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.AttributeSet;
@@ -26,6 +24,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
+import com.android.launcher3.util.LogT;
 
 public class Hotseat extends FrameLayout
         implements Stats.LaunchSourceProvider{
@@ -73,6 +73,7 @@ public class Hotseat extends FrameLayout
   
     /* Get the orientation invariant order of the item in the hotseat for persistence. */
     int getOrderInHotseat(int x, int y) {
+        LogT.w("坐标="+(mContent.getCountY()-y-1)+",x="+x);
         return mHasVerticalHotseat ? (mContent.getCountY() - y - 1) : x;
     }
 

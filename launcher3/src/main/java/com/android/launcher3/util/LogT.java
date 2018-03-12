@@ -16,7 +16,7 @@ public class LogT {
      */
     private static boolean isShowLog = true;
 
-    private static final String DOUBLE_DIVIDER = "--->>";
+    private static final String DOUBLE_DIVIDER = "--->";
 
     public static void init(boolean isShowLog) {
         LogT.isShowLog = isShowLog;

@@ -63,7 +63,6 @@ import com.android.launcher3.FolderIcon.FolderRingAnimator;
 import com.android.launcher3.Launcher.CustomContentCallbacks;
 import com.android.launcher3.Launcher.LauncherOverlay;
 import com.android.launcher3.LauncherSettings.Favorites;
-//import com.android.launcher3.UninstallDropTarget.UninstallSource;
 import com.android.launcher3.accessibility.LauncherAccessibilityDelegate;
 import com.android.launcher3.accessibility.LauncherAccessibilityDelegate.AccessibilityDragSource;
 import com.android.launcher3.accessibility.OverviewScreenAccessibilityDelegate;
@@ -78,6 +77,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.concurrent.atomic.AtomicInteger;
+
+//import com.android.launcher3.UninstallDropTarget.UninstallSource;
 
 /**
  * The workspace is a wide area with a wallpaper and a finite number of pages.
@@ -938,12 +939,16 @@ public class Workspace extends PagedView
     // See implementation for parameter definition.
     void addInScreenFromBind(View child, long container, long screenId, int x, int y,
             int spanX, int spanY) {
+//        LogT.w("addInScreenFromBind,child="+child+",container="+container+",screenId="+screenId
+//        +",x="+x+",y="+y+",spanX="+spanX+",spanY="+spanY);
         addInScreen(child, container, screenId, x, y, spanX, spanY, false, true);
     }
 
     // See implementation for parameter definition.
     void addInScreen(View child, long container, long screenId, int x, int y, int spanX, int spanY,
             boolean insert) {
+//        LogT.w("addInScreen,child="+child+",container="+container+",screenId="+screenId
+//                +",x="+x+",y="+y+",spanX="+spanX+",spanY="+spanY);
         addInScreen(child, container, screenId, x, y, spanX, spanY, insert, false);
     }
 
@@ -964,6 +969,8 @@ public class Workspace extends PagedView
      */
     void addInScreen(View child, long container, long screenId, int x, int y, int spanX, int spanY,
             boolean insert, boolean computeXYFromRank) {
+//        LogT.w("addInScreen,child="+child+",container="+container+",screenId="+screenId
+//                +",x="+x+",y="+y+",spanX="+spanX+",spanY="+spanY);
         if (container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
             if (getScreenWithId(screenId) == null) {
                 Log.e(TAG, "Skipping child, screenId " + screenId + " not found");

@@ -24,8 +24,10 @@ import android.util.AttributeSet;
 import android.util.Pair;
 import android.view.View;
 
+import com.android.launcher3.util.LogT;
 import com.android.launcher3.util.Thunk;
 
+/* 加载在每个ICON 或者 widget 后面加背景 */
 public class FocusIndicatorView extends View implements View.OnFocusChangeListener {
 
     // It can be any number >0. The view is resized using scaleX and scaleY.
@@ -104,6 +106,8 @@ public class FocusIndicatorView extends View implements View.OnFocusChangeListen
                         PropertyValuesHolder.ofFloat(View.TRANSLATION_Y, mTargetState.y),
                         PropertyValuesHolder.ofFloat(View.SCALE_X, mTargetState.scaleX),
                         PropertyValuesHolder.ofFloat(View.SCALE_Y, mTargetState.scaleY));
+                LogT.w("icon背景：透明度="+ View.ALPHA+",TRANSLATION_X="+ mTargetState.x+",TRANSLATION_Y="+ mTargetState.y
+                        +",SCALE_X="+mTargetState.scaleX+",SCALE_Y="+mTargetState.scaleY);
             } else {
                 applyState(nextState);
                 mCurrentAnimation = LauncherAnimUtils.ofPropertyValuesHolder(this,
@@ -139,6 +143,8 @@ public class FocusIndicatorView extends View implements View.OnFocusChangeListen
         setTranslationY(state.y);
         setScaleX(state.scaleX);
         setScaleY(state.scaleY);
+        LogT.w("设置显示：setTranslationX="+state.x+",setTranslationX="+state.y
+        +",setScaleX="+state.scaleX+",setScaleY="+state.scaleY);
     }
 
     @Override

@@ -34,6 +34,7 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.inputmethod.InputMethodManager;
 
+import com.android.launcher3.util.LogT;
 import com.android.launcher3.util.Thunk;
 
 import java.util.ArrayList;
@@ -437,7 +438,7 @@ public class DragController {
         @SuppressWarnings("all") // suppress dead code warning
         final boolean debug = false;
         if (debug) {
-            Log.d(Launcher.TAG, "DragController.onInterceptTouchEvent " + ev + " mDragging="
+            LogT.d( "DragController.onInterceptTouchEvent " + ev + " mDragging="
                     + mDragging);
         }
 

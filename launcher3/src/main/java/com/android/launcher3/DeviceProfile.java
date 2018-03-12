@@ -32,6 +32,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
+/* 设置初始布局 */
 public class DeviceProfile {
 
     public final InvariantDeviceProfile inv;
@@ -97,8 +98,8 @@ public class DeviceProfile {
     private int searchBarSpaceHeightPx;
 
     public DeviceProfile(Context context, InvariantDeviceProfile inv,
-            Point minSize, Point maxSize,
-            int width, int height, boolean isLandscape) {
+                         Point minSize, Point maxSize,
+                         int width, int height, boolean isLandscape) {
 
         this.inv = inv;
         this.isLandscape = isLandscape;
@@ -166,7 +167,9 @@ public class DeviceProfile {
     private void computeAllAppsButtonSize(Context context) {
         Resources res = context.getResources();
         float padding = res.getInteger(R.integer.config_allAppsButtonPaddingPercent) / 100f;
+
         allAppsButtonVisualSize = (int) (hotseatIconSizePx * (1 - padding));
+//        LogT.w("padding=" + padding + ",allAppsButtonVisualSize=" + allAppsButtonVisualSize);
     }
 
     private void updateAvailableDimensions(DisplayMetrics dm, Resources res) {
@@ -237,7 +240,9 @@ public class DeviceProfile {
         allAppsNumPredictiveCols = numPredictiveAppCols;
     }
 
-    /** Returns the search bar top offset */
+    /**
+     * Returns the search bar top offset
+     */
     private int getSearchBarTopOffset() {
         if (isTablet && !isVerticalBarLayout()) {
             return 4 * edgeMarginPx;
@@ -246,7 +251,9 @@ public class DeviceProfile {
         }
     }
 
-    /** Returns the search bar bounds in the current orientation */
+    /**
+     * Returns the search bar bounds in the current orientation
+     */
     public Rect getSearchBarBounds(boolean isLayoutRtl) {
         Rect bounds = new Rect();
         if (isLandscape && transposeLayoutWithOrientation) {
@@ -273,25 +280,32 @@ public class DeviceProfile {
                 bounds.set(desiredWorkspaceLeftRightMarginPx - defaultWidgetPadding.left,
                         getSearchBarTopOffset(),
                         availableWidthPx - (desiredWorkspaceLeftRightMarginPx -
-                        defaultWidgetPadding.right), searchBarSpaceHeightPx);
+                                defaultWidgetPadding.right), searchBarSpaceHeightPx);
             }
         }
         return bounds;
     }
 
-    /** Returns the workspace padding in the specified orientation */
+    /**
+     * Returns the workspace padding in the specified orientation
+     * 设置workspace的边距
+     */
     Rect getWorkspacePadding(boolean isLayoutRtl) {
         Rect searchBarBounds = getSearchBarBounds(isLayoutRtl);
         Rect padding = new Rect();
+
         if (isLandscape && transposeLayoutWithOrientation) {
             // Pad the left and right of the workspace with search/hotseat bar sizes
             if (isLayoutRtl) {
                 padding.set(hotseatBarHeightPx, edgeMarginPx,
                         searchBarBounds.width(), edgeMarginPx);
+//                LogT.w("左=" + hotseatBarHeightPx + "上=" + edgeMarginPx + "右=" + searchBarBounds.width() + "下=" + edgeMarginPx);
             } else {
                 padding.set(searchBarBounds.width(), edgeMarginPx,
                         hotseatBarHeightPx, edgeMarginPx);
+//                LogT.w("左=" + searchBarBounds.width() + "上=" + edgeMarginPx + "右=" + hotseatBarHeightPx + "下=" + edgeMarginPx);
             }
+
         } else {
             if (isTablet) {
                 // Pad the left and right of the workspace to ensure consistent spacing
@@ -309,10 +323,20 @@ public class DeviceProfile {
                         availableWidth / 2, paddingBottom + availableHeight / 2);
             } else {
                 // Pad the top and bottom of the workspace with search/hotseat bar sizes
-                padding.set(desiredWorkspaceLeftRightMarginPx - defaultWidgetPadding.left,
+//                padding.set(desiredWorkspaceLeftRightMarginPx - defaultWidgetPadding.left,
+//                        searchBarBounds.bottom,
+//                        desiredWorkspaceLeftRightMarginPx - defaultWidgetPadding.right,
+//                        hotseatBarHeightPx + pageIndicatorHeightPx);
+                padding.set(edgeMarginPx,
                         searchBarBounds.bottom,
-                        desiredWorkspaceLeftRightMarginPx - defaultWidgetPadding.right,
+                        edgeMarginPx,
                         hotseatBarHeightPx + pageIndicatorHeightPx);
+
+//                LogT.w("左=" + (desiredWorkspaceLeftRightMarginPx - defaultWidgetPadding.left)
+//                        + "上=" + searchBarBounds.bottom
+//                        + "右=" + (desiredWorkspaceLeftRightMarginPx - defaultWidgetPadding.right)
+//                        + "下=" + (hotseatBarHeightPx + pageIndicatorHeightPx));
+
             }
         }
         return padding;
@@ -351,6 +375,7 @@ public class DeviceProfile {
     public static int calculateCellWidth(int width, int countX) {
         return width / countX;
     }
+
     public static int calculateCellHeight(int height, int countY) {
         return height / countY;
     }
@@ -425,23 +450,24 @@ public class DeviceProfile {
             lp.gravity = Gravity.RIGHT;
             lp.width = hotseatBarHeightPx;
             lp.height = LayoutParams.MATCH_PARENT;
-            hotseat.findViewById(R.id.layout).setPadding(0, 2 * edgeMarginPx, 0, 2 * edgeMarginPx);
+//            hotseat.findViewById(R.id.layout).setPadding(0, 2 * edgeMarginPx, 0, 2 * edgeMarginPx);
+            hotseat.findViewById(R.id.layout).setPadding(edgeMarginPx, edgeMarginPx, edgeMarginPx, edgeMarginPx);
         } else if (isTablet) {
             // Pad the hotseat with the workspace padding calculated above
             lp.gravity = Gravity.BOTTOM;
             lp.width = LayoutParams.MATCH_PARENT;
             lp.height = hotseatBarHeightPx;
-            hotseat.setPadding(edgeMarginPx + padding.left, 0,
-                    edgeMarginPx + padding.right,
-                    2 * edgeMarginPx);
+//            hotseat.setPadding(edgeMarginPx + padding.left, 0,edgeMarginPx + padding.right,2 * edgeMarginPx);
+            hotseat.setPadding(edgeMarginPx, edgeMarginPx, edgeMarginPx, edgeMarginPx);
+
         } else {
             // For phones, layout the hotseat without any bottom margin
             // to ensure that we have space for the folders
             lp.gravity = Gravity.BOTTOM;
             lp.width = LayoutParams.MATCH_PARENT;
             lp.height = hotseatBarHeightPx;
-            hotseat.findViewById(R.id.layout).setPadding(2 * edgeMarginPx, 0,
-                    2 * edgeMarginPx, 0);
+//            hotseat.findViewById(R.id.layout).setPadding(2 * edgeMarginPx, 0,2 * edgeMarginPx, 0);
+            hotseat.setPadding(edgeMarginPx, edgeMarginPx, edgeMarginPx, edgeMarginPx);
         }
         hotseat.setLayoutParams(lp);
 
@@ -458,6 +484,7 @@ public class DeviceProfile {
                 lp.width = LayoutParams.WRAP_CONTENT;
                 lp.height = LayoutParams.WRAP_CONTENT;
                 lp.bottomMargin = hotseatBarHeightPx;
+//                lp.bottomMargin = 10;
                 pageIndicator.setLayoutParams(lp);
             }
         }

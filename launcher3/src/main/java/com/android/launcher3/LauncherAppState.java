@@ -20,12 +20,12 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.util.Log;
 
 import com.android.launcher3.accessibility.LauncherAccessibilityDelegate;
 import com.android.launcher3.compat.LauncherAppsCompat;
 import com.android.launcher3.compat.PackageInstallerCompat;
 import com.android.launcher3.compat.UserManagerCompat;
+import com.android.launcher3.util.LogT;
 import com.android.launcher3.util.Thunk;
 
 import java.lang.ref.WeakReference;
@@ -71,7 +71,7 @@ public class LauncherAppState {
 
     public static void setApplicationContext(Context context) {
         if (sContext != null) {
-            Log.w(Launcher.TAG, "setApplicationContext called twice! old=" + sContext + " new=" + context);
+            LogT.w("setApplicationContext called twice! old=" + sContext + " new=" + context);
         }
         sContext = context.getApplicationContext();
     }
@@ -81,7 +81,7 @@ public class LauncherAppState {
             throw new IllegalStateException("LauncherAppState inited before app context set");
         }
 
-        Log.v(Launcher.TAG, "LauncherAppState inited");
+        LogT.v("LauncherAppState inited");
 
         if (sContext.getResources().getBoolean(R.bool.debug_memory_enabled)) {
             MemoryTracker.startTrackingMe(sContext, "L");
@@ -113,7 +113,7 @@ public class LauncherAppState {
     /**
      * Call from Application.onTerminate(), which is not guaranteed to ever be called.
      */
-    public void onTerminate() {
+    void onTerminate() {
         sContext.unregisterReceiver(mModel);
         final LauncherAppsCompat launcherApps = LauncherAppsCompat.getInstance(sContext);
         launcherApps.removeOnAppsChangedCallback(mModel);
@@ -124,7 +124,7 @@ public class LauncherAppState {
      * Reloads the workspace items from the DB and re-binds the workspace. This should generally
      * not be called as DB updates are automatically followed by UI update
      */
-    public void reloadWorkspace() {
+    void reloadWorkspace() {
         mModel.resetLoadedState(false, true);
         mModel.startLoaderFromBackground();
     }
@@ -150,7 +150,7 @@ public class LauncherAppState {
     }
 
     static void setLauncherProvider(LauncherProvider provider) {
-        sLauncherProvider = new WeakReference<LauncherProvider>(provider);
+        sLauncherProvider = new WeakReference<>(provider);
     }
 
     public static LauncherProvider getLauncherProvider() {
@@ -165,11 +165,11 @@ public class LauncherAppState {
         return mWidgetCache;
     }
     
-    public void onWallpaperChanged() {
+    void onWallpaperChanged() {
         mWallpaperChangedSinceLastCheck = true;
     }
 
-    public boolean hasWallpaperChangedSinceLastCheck() {
+    boolean hasWallpaperChangedSinceLastCheck() {
         boolean result = mWallpaperChangedSinceLastCheck;
         mWallpaperChangedSinceLastCheck = false;
         return result;

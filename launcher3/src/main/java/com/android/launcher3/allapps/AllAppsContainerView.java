@@ -48,6 +48,7 @@ import com.android.launcher3.R;
 import com.android.launcher3.Utilities;
 import com.android.launcher3.Workspace;
 import com.android.launcher3.util.ComponentKey;
+import com.android.launcher3.util.LogT;
 import com.android.launcher3.util.Thunk;
 
 import java.nio.charset.Charset;
@@ -125,6 +126,7 @@ final class SimpleSectionMergeAlgorithm implements AlphabeticalAppsList.MergeAlg
 
 /**
  * The all apps view container.
+ * 所有app的操作事件
  */
 public class AllAppsContainerView extends BaseContainerView implements DragSource,
         LauncherTransitionable, View.OnTouchListener, View.OnLongClickListener,
@@ -303,6 +305,7 @@ public class AllAppsContainerView extends BaseContainerView implements DragSourc
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
+                    if(Launcher.DEBUG) LogT.w("mAppsRecyclerView,获取焦点");
                     mAppsRecyclerView.requestFocus();
                 }
             }
@@ -314,7 +317,7 @@ public class AllAppsContainerView extends BaseContainerView implements DragSourc
         mRevealView = findViewById(R.id.all_apps_reveal);
 
         // Load the all apps recycler view
-        mAppsRecyclerView = (AllAppsRecyclerView) findViewById(R.id.apps_list_view);
+        mAppsRecyclerView = findViewById(R.id.apps_list_view);
         mAppsRecyclerView.setApps(mApps);
         mAppsRecyclerView.setLayoutManager(mLayoutManager);
         mAppsRecyclerView.setAdapter(mAdapter);
@@ -346,7 +349,7 @@ public class AllAppsContainerView extends BaseContainerView implements DragSourc
             // If there is a start margin to draw section names, determine how we are going to merge
             // app sections
             boolean mergeSectionsFully = mSectionNamesMargin == 0 || !grid.isPhone;
-            AlphabeticalAppsList.MergeAlgorithm mergeAlgorithm = mergeSectionsFully ?
+            @SuppressLint("DrawAllocation") AlphabeticalAppsList.MergeAlgorithm mergeAlgorithm = mergeSectionsFully ?
                     new FullMergeAlgorithm() :
                     new SimpleSectionMergeAlgorithm((int) Math.ceil(mNumAppsPerRow / 2f),
                             MIN_ROWS_IN_MERGED_SECTION_PHONE, MAX_NUM_MERGES_PHONE);
@@ -470,7 +473,6 @@ public class AllAppsContainerView extends BaseContainerView implements DragSourc
         mLauncher.getWorkspace().beginDragShared(v, mIconLastTouchPos, this, false);
         // Enter spring loaded mode
         mLauncher.enterSpringLoadedDragMode();
-
         return false;
     }
 

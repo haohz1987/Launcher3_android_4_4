@@ -22,6 +22,8 @@ import android.animation.TimeInterpolator;
 import android.view.View;
 import android.view.ViewPropertyAnimator;
 
+import com.android.launcher3.util.LogT;
+
 import java.util.ArrayList;
 import java.util.EnumSet;
 
@@ -108,6 +110,7 @@ public class LauncherViewPropertyAnimator extends Animator implements AnimatorLi
 
     @Override
     public void onAnimationEnd(Animator animation) {
+       if(Launcher.DEBUG) LogT.w("onAnimationEnd");
         for (int i = 0; i < mListeners.size(); i++) {
             Animator.AnimatorListener listener = mListeners.get(i);
             listener.onAnimationEnd(this);
@@ -117,6 +120,7 @@ public class LauncherViewPropertyAnimator extends Animator implements AnimatorLi
 
     @Override
     public void onAnimationRepeat(Animator animation) {
+        if(Launcher.DEBUG) LogT.w("onAnimationRepeat");
         for (int i = 0; i < mListeners.size(); i++) {
             Animator.AnimatorListener listener = mListeners.get(i);
             listener.onAnimationRepeat(this);
@@ -125,10 +129,8 @@ public class LauncherViewPropertyAnimator extends Animator implements AnimatorLi
 
     @Override
     public void onAnimationStart(Animator animation) {
-        // This is the first time we get a handle to the internal ValueAnimator
-        // used by the ViewPropertyAnimator.
+        if(Launcher.DEBUG) LogT.w("onAnimationStart");
         mFirstFrameHelper.onAnimationStart(animation);
-
         for (int i = 0; i < mListeners.size(); i++) {
             Animator.AnimatorListener listener = mListeners.get(i);
             listener.onAnimationStart(this);

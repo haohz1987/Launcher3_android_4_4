@@ -54,14 +54,14 @@ class AlphaUpdateListener extends AnimatorListenerAdapter implements ValueAnimat
     public static void updateVisibility(View view, boolean accessibilityEnabled) {
         // We want to avoid the extra layout pass by setting the views to GONE unless
         // accessibility is on, in which case not setting them to GONE causes a glitch.
-        int invisibleState = accessibilityEnabled ? View.GONE : View.INVISIBLE;
-        if (view.getAlpha() < ALPHA_CUTOFF_THRESHOLD && view.getVisibility() != invisibleState) {
+        view.setVisibility(View.VISIBLE);
+//        int invisibleState = accessibilityEnabled ? View.GONE : View.INVISIBLE;
+//        if (view.getAlpha() < ALPHA_CUTOFF_THRESHOLD && view.getVisibility() != invisibleState) {
 //            view.setVisibility(invisibleState);
-            view.setVisibility(View.VISIBLE);
-        } else if (view.getAlpha() > ALPHA_CUTOFF_THRESHOLD
-                && view.getVisibility() != View.VISIBLE) {
-            view.setVisibility(View.VISIBLE);
-        }
+//        } else if (view.getAlpha() > ALPHA_CUTOFF_THRESHOLD
+//                && view.getVisibility() != View.VISIBLE) {
+//            view.setVisibility(View.VISIBLE);
+//        }
     }
 
     @Override

@@ -25,6 +25,7 @@ import com.android.launcher3.compat.AlphabeticIndexCompat;
 import com.android.launcher3.compat.UserHandleCompat;
 import com.android.launcher3.model.AppNameComparator;
 import com.android.launcher3.util.ComponentKey;
+import com.android.launcher3.util.LogT;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -334,6 +335,7 @@ public class AlphabeticalAppsList {
      * Updates internals when the set of apps are updated.
      */
     private void onAppsUpdated() {
+       if(Launcher.DEBUG) LogT.w("onAppsUpdated");
         // Sort the list of apps
         mApps.clear();
         mApps.addAll(mComponentToAppMap.values());

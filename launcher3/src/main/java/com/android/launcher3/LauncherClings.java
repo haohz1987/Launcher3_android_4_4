@@ -35,8 +35,9 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.accessibility.AccessibilityManager;
 
+import com.android.launcher3.util.LogT;
 import com.android.launcher3.util.Thunk;
-
+/* 引导页面 */
 class LauncherClings implements OnClickListener {
     private static final String MIGRATION_CLING_DISMISSED_KEY = "cling_gel.migration.dismissed";
     private static final String WORKSPACE_CLING_DISMISSED_KEY = "cling_gel.workspace.dismissed";
@@ -61,6 +62,7 @@ class LauncherClings implements OnClickListener {
 
     @Override
     public void onClick(View v) {
+        LogT.w("id="+v.getId());
         int id = v.getId();
         if (id == R.id.cling_dismiss_migration_use_default) {
             // Disable the migration cling
